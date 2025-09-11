@@ -12,7 +12,6 @@ const NAVBAR_HTML = `<header>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="services.html">Services</a></li>
                 <li><a href="locations.html">Locations</a></li>
-                <li><a href="coverage-area.html">Coverage Area</a></li>
                 <li><a href="contact.html">Contact Us</a></li>
             </ul>
         </nav>
@@ -34,7 +33,6 @@ const NAVBAR_HTML = `<header>
         <li><a href="index.html">Home</a></li>
         <li><a href="services.html">Services</a></li>
         <li><a href="locations.html">Locations</a></li>
-        <li><a href="coverage-area.html">Coverage Area</a></li>
         <li><a href="contact.html">Contact Us</a></li>
     </ul>
 </nav>`;
