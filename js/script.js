@@ -39,16 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         function showSlide(index) {
             slides.forEach((slide, i) => {
-                slide.classList.remove('active', 'prev', 'next');
-                let newIndex = i - index;
-                if (newIndex < 0) newIndex += slides.length;
-                if (newIndex === 0) {
-                    slide.classList.add('active');
-                } else if (newIndex === 1 || newIndex === -slides.length + 1) {
-                    slide.classList.add('next');
-                } else if (newIndex === slides.length - 1 || newIndex === -1) {
-                    slide.classList.add('prev');
-                }
+                slide.classList.toggle('active', i === index);
             });
         }
 

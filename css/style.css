@@ -316,29 +316,23 @@ header nav {
     background-color: rgba(12, 42, 76, 0.5); /* Slightly lighter blue with opacity */
     border-radius: 5px;
     box-sizing: border-box;
-    transition: transform 0.5s ease-in-out, background-color 0.5s ease-in-out;
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    transform: scale(0.8) rotateY(0);
+    display: none; /* Hide slides by default */
 }
 
 .testimonial-slide.active {
     background-color: #0c2a4c;
     position: relative;
-    transform: scale(1) rotateY(0);
+    display: block; /* Only show active slide */
     z-index: 2;
 }
 
-.testimonial-slide.prev {
-    transform: translateX(-50%) scale(0.8) rotateY(-30deg);
-    z-index: 1;
-}
-
+.testimonial-slide.prev,
 .testimonial-slide.next {
-    transform: translateX(50%) scale(0.8) rotateY(30deg);
-    z-index: 1;
+    display: none; /* Ensure previous/next slides remain hidden */
 }
 
 .testimonial-slide .stars {
