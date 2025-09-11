@@ -227,6 +227,13 @@ header nav {
     margin-bottom: 1rem;
 }
 
+.content-image {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+}
+
 .locations-overview {
     padding: 3rem 0;
     background-color: var(--light-gray);
