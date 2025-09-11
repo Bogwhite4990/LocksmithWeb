@@ -232,6 +232,29 @@ header nav {
     margin-bottom: 1rem;
 }
 
+/* Promo Banner */
+.promo-banner {
+    background-color: var(--accent-color);
+    color: var(--secondary-color);
+    text-align: center;
+    padding: 2rem 1rem;
+}
+
+.promo-banner .promo-text {
+    font-size: 1.5rem;
+    margin: 0;
+    font-weight: 700;
+}
+
+.promo-banner .cta-button {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+.promo-banner .cta-button:hover {
+    color: var(--primary-color);
+}
+
 .content-image {
     width: 80px;
     height: auto;
