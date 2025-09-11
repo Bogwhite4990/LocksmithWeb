@@ -14,7 +14,7 @@ const CONTACT_INFO = {
     }
 };
 
-document.addEventListener('DOMContentLoaded', function() {
+function initSite() {
     // This script handles all the dynamic functionality for the website.
     const phoneDigits = CONTACT_INFO.phone.replace(/[^0-9]/g, '');
 
@@ -214,4 +214,6 @@ document.addEventListener('DOMContentLoaded', function() {
     whatsappBtn.setAttribute('aria-label', 'Chat on WhatsApp');
     whatsappBtn.innerHTML = '<i class="fab fa-whatsapp"></i>';
     document.body.appendChild(whatsappBtn);
-});
+}
+
+initSite();
