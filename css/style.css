@@ -463,6 +463,10 @@ footer {
     gap: 1.5rem;
 }
 
+.location-item.hidden {
+    display: none;
+}
+
 .location-item a {
     display: block;
     background-color: var(--light-gray);

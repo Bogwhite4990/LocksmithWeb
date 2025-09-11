@@ -50,4 +50,14 @@ document.addEventListener('DOMContentLoaded', function() {
         setInterval(nextSlide, 5000); // Autoplay every 5 seconds
         window.addEventListener('resize', showSlides);
     }
+
+    // Reveal all locations on index page
+    const viewAllBtn = document.querySelector('#view-all-locations');
+    if (viewAllBtn) {
+        viewAllBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelectorAll('.location-item.hidden').forEach(item => item.classList.remove('hidden'));
+            viewAllBtn.style.display = 'none';
+        });
+    }
 });
