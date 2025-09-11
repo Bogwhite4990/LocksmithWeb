@@ -798,6 +798,21 @@ footer h3 {
     }
 }
 
+/* SEO Content Styling */
+.seo-content {
+    background-color: var(--light-gray);
+    padding: 3rem 0;
+    margin-top: 2rem;
+}
+
+.seo-content .container {
+    background-color: var(--secondary-color);
+    border-left: 4px solid var(--accent-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
 /* Animation Styles */
 .service-extra,
 .service-guarantee p {
