@@ -132,9 +132,9 @@ header nav {
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(rgba(10, 35, 66, 0.7), rgba(10, 35, 66, 0.7)), url(../images/hero-background.jpg) no-repeat center center/cover;
+    background: linear-gradient(rgba(10, 35, 66, 0.7), rgba(10, 35, 66, 0.7)), url(../images/hero-background.png) no-repeat center center/cover;
     color: var(--secondary-color);
-    padding: 6rem 0;
+    padding: 8rem 0;
     text-align: center;
 }
 
