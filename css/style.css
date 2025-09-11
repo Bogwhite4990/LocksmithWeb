@@ -933,3 +933,46 @@ footer h3 {
         transform: translateY(-10px);
     }
 }
+
+/* About Us Section */
+.about-us-section {
+    padding: 3rem 0;
+}
+
+.about-us-section h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.about-us-section h3 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--accent-color);
+}
+
+.about-us-section .container p {
+    color: var(--dark-gray);
+}
+
+.about-us-images {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.about-us-images img {
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.about-us-images img:hover {
+    transform: scale(1.05);
+}
+
+@media (min-width: 768px) {
+    .about-us-images {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
