@@ -185,6 +185,50 @@ header nav {
     margin-top: 1rem;
 }
 
+.hero-phone-container {
+    margin-top: 2rem;
+}
+
+.hero-phone-button {
+    display: inline-flex;
+    align-items: center;
+    background-color: var(--accent-color);
+    color: var(--secondary-color);
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.hero-phone-button:hover {
+    background-color: #258a74; /* A slightly darker shade of accent */
+    transform: translateY(-3px);
+    color: var(--secondary-color);
+}
+
+.hero-phone-button i {
+    margin-right: 1rem;
+    font-size: 1.8rem;
+}
+
+.hero-phone-button span {
+    display: inline-block;
+}
+
+.hero-phone-button strong {
+    font-size: 1.8rem;
+}
+
+.availability-text {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+}
+
 /* Trust Signals */
 .trust-signals {
     padding: 3rem 0;

@@ -26,6 +26,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // Update contact information across the page
     document.querySelectorAll('a[href^="tel:"]').forEach(a => {
         a.href = `tel:${phoneDigits}`;
+
+        const phoneElement = a.querySelector('.phone-number-text');
+        if (phoneElement) {
+            phoneElement.textContent = CONTACT_INFO.phone;
+            return;
+        }
+
         if (/\d/.test(a.textContent)) {
             a.textContent = a.textContent.replace(/[\d\-\s]+/, CONTACT_INFO.phone);
         } else if (a.textContent.trim() !== '') {
