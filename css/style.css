@@ -1,3 +1,5 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css');
+
 /*
     Color Palette:
     - Dark Blue: #0A2342
@@ -89,12 +91,28 @@ header nav {
     display: none; /* Hidden on mobile */
 }
 
+.header-phone {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
 .header-phone a {
     font-weight: 500;
     color: var(--primary-color);
     border: 2px solid var(--accent-color);
     padding: 0.5rem 1rem;
     border-radius: 5px;
+}
+
+.header-social a {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    margin-left: 0.3rem;
+}
+
+.header-social a:hover {
+    color: var(--accent-color);
 }
 
 /* Hero Section */
@@ -116,8 +134,13 @@ header nav {
     margin-bottom: 2rem;
 }
 
+.hero .phone-number {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+}
+
 .hero .phone-number a {
-    font-size: 1.5rem;
+    font-size: 2.2rem;
     font-weight: 700;
     color: var(--accent-color);
 }
@@ -149,6 +172,13 @@ header nav {
 
 .trust-signals .signal {
     flex: 1;
+}
+
+.trust-signals .signal i {
+    font-size: 2rem;
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+    display: block;
 }
 
 /* Services Overview */
