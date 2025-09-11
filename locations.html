@@ -12,43 +12,40 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Locksmith",
-      "name": "Locksmith",
-      "image": "https://www.example.com/logo.jpg",
-      "@id": "",
+      "@type": "Service",
+      "serviceType": "Locksmith",
+      "provider": {
+        "@type": "Locksmith",
+        "name": "Locksmith"
+      },
+      "areaServed": [
+        { "@type": "City", "name": "Islington" },
+        { "@type": "City", "name": "Camden" },
+        { "@type": "City", "name": "Westminster" },
+        { "@type": "City", "name": "Hackney" },
+        { "@type": "City", "name": "Kensington" },
+        { "@type": "City", "name": "Luton" },
+        { "@type": "City", "name": "Croydon" },
+        { "@type": "City", "name": "Harrow" },
+        { "@type": "City", "name": "West London" },
+        { "@type": "City", "name": "North London" },
+        { "@type": "City", "name": "North West London" },
+        { "@type": "City", "name": "East London" },
+        { "@type": "City", "name": "South West London" },
+        { "@type": "City", "name": "South East London" },
+        { "@type": "City", "name": "Watford" },
+        { "@type": "City", "name": "Enfield" },
+        { "@type": "City", "name": "Uxbridge" },
+        { "@type": "City", "name": "Ilford" },
+        { "@type": "City", "name": "Romford" },
+        { "@type": "City", "name": "Hounslow" },
+        { "@type": "City", "name": "Dartford" },
+        { "@type": "City", "name": "Kingston upon Thames" },
+        { "@type": "City", "name": "Sutton" },
+        { "@type": "City", "name": "Bromley" }
+      ],
       "url": "https://www.example.com/locations.html",
-      "telephone": "0123-456-7890",
-      "priceRange": "$$",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "123 Locking St",
-        "addressLocality": "London",
-        "postalCode": "E1 6AN",
-        "addressCountry": "UK"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 51.507351,
-        "longitude": -0.127758
-      },
-      "openingHoursSpecification": {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-          "Sunday"
-        ],
-        "opens": "00:00",
-        "closes": "23:59"
-      },
-      "sameAs": [
-        "https://www.facebook.com/your-locksmith",
-        "https://www.twitter.com/your-locksmith"
-      ]
+      "name": "Service Locations"
     }
     </script>
 </head>
@@ -92,157 +89,60 @@
     <main class="service-page">
         <section class="hero-small">
             <div class="container">
-                <h1>Our Locations</h1>
+                <h1>Our Service Areas</h1>
+                <p>We provide expert locksmith services across London and surrounding areas. Find your local technician below.</p>
             </div>
         </section>
 
         <section class="locations-list">
             <div class="container">
-                <h2>Find Your Local Locksmith</h2>
-                <div class="location-grid">
-                    <div class="location-item">
-                        <a href="locations/islington.html">
-                            <img src="images/islington.svg" alt="Islington" class="content-image">
-                            <h3>Locksmith in Islington</h3>
-                        </a>
+                <div class="area-group">
+                    <h2 class="area-title">North London</h2>
+                    <div class="location-grid">
+                        <div class="location-item fade-in-element"><a href="locations/north-london.html"><img src="images/north-london.svg" alt="North London"><h3>North London</h3></a></div>
+                        <div class="location-item fade-in-element"><a href="locations/north-west-london.html"><img src="images/north-west-london.svg" alt="North West London"><h3>North West London</h3></a></div>
+                        <div class="location-item fade-in-element"><a href="locations/islington.html"><img src="images/islington.svg" alt="Islington"><h3>Islington</h3></a></div>
+                        <div class="location-item fade-in-element"><a href="locations/camden.html"><img src="images/camden.svg" alt="Camden"><h3>Camden</h3></a></div>
+                        <div class="location-item fade-in-element"><a href="locations/hackney.html"><img src="images/hackney.svg" alt="Hackney"><h3>Hackney</h3></a></div>
+                        <div class="location-item fade-in-element"><a href="locations/enfield.html"><img src="images/enfield.svg" alt="Enfield"><h3>Enfield</h3></a></div>
+                        <div class="location-item fade-in-element"><a href="locations/harrow.html"><img src="images/harrow.svg" alt="Harrow"><h3>Harrow</h3></a></div>
                     </div>
-                    <div class="location-item">
-                        <a href="locations/camden.html">
-                            <img src="images/camden.svg" alt="Camden" class="content-image">
-                            <h3>Locksmith in Camden</h3>
-                        </a>
+                </div>
+                <div class="area-group">
+                    <h2 class="area-title">West London</h2>
+                    <div class="location-grid">
+                        <div class="location-item fade-in-element"><a href="locations/west-london.html"><img src="images/west-london.svg" alt="West London"><h3>West London</h3></a></div>
+                        <div class="location-item fade-in-element"><a href="locations/westminster.html"><img src="images/westminster.svg" alt="Westminster"><h3>Westminster</h3></a></div>
+                        <div class="location-item fade-in-element"><a href="locations/kensington.html"><img src="images/kensington.svg" alt="Kensington"><h3>Kensington</h3></a></div>
+                        <div class="location-item fade-in-element"><a href="locations/hounslow.html"><img src="images/hounslow.svg" alt="Hounslow"><h3>Hounslow</h3></a></div>
+                        <div class="location-item fade-in-element"><a href="locations/uxbridge.html"><img src="images/uxbridge.svg" alt="Uxbridge"><h3>Uxbridge</h3></a></div>
                     </div>
-                    <div class="location-item">
-                        <a href="locations/westminster.html">
-                            <img src="images/westminster.svg" alt="Westminster" class="content-image">
-                            <h3>Locksmith in Westminster</h3>
-                        </a>
+                </div>
+                <div class="area-group">
+                    <h2 class="area-title">East London</h2>
+                    <div class="location-grid">
+                        <div class="location-item fade-in-element"><a href="locations/east-london.html"><img src="images/east-london.svg" alt="East London"><h3>East London</h3></a></div>
+                        <div class="location-item fade-in-element"><a href="locations/ilford.html"><img src="images/ilford.svg" alt="Ilford"><h3>Ilford</h3></a></div>
+                        <div class="location-item fade-in-element"><a href="locations/romford.html"><img src="images/romford.svg" alt="Romford"><h3>Romford</h3></a></div>
                     </div>
-                    <div class="location-item">
-                        <a href="locations/hackney.html">
-                            <img src="images/hackney.svg" alt="Hackney" class="content-image">
-                            <h3>Locksmith in Hackney</h3>
-                        </a>
+                </div>
+                <div class="area-group">
+                    <h2 class="area-title">South London</h2>
+                    <div class="location-grid">
+                        <div class="location-item fade-in-element"><a href="locations/south-west-london.html"><img src="images/south-west-london.svg" alt="South West London"><h3>South West London</h3></a></div>
+                        <div class="location-item fade-in-element"><a href="locations/south-east-london.html"><img src="images/south-east-london.svg" alt="South East London"><h3>South East London</h3></a></div>
+                        <div class="location-item fade-in-element"><a href="locations/croydon.html"><img src="images/croydon.svg" alt="Croydon"><h3>Croydon</h3></a></div>
+                        <div class="location-item fade-in-element"><a href="locations/kingston-upon-thames.html"><img src="images/kingston-upon-thames.svg" alt="Kingston upon Thames"><h3>Kingston upon Thames</h3></a></div>
+                        <div class="location-item fade-in-element"><a href="locations/sutton.html"><img src="images/sutton.svg" alt="Sutton"><h3>Sutton</h3></a></div>
+                        <div class="location-item fade-in-element"><a href="locations/bromley.html"><img src="images/bromley.svg" alt="Bromley"><h3>Bromley</h3></a></div>
                     </div>
-                    <div class="location-item">
-                        <a href="locations/kensington.html">
-                            <img src="images/kensington.svg" alt="Kensington" class="content-image">
-                            <h3>Locksmith in Kensington</h3>
-                        </a>
-                    </div>
-                    <div class="location-item">
-                        <a href="locations/luton.html">
-                            <img src="images/luton.svg" alt="Luton" class="content-image">
-                            <h3>Locksmith in Luton</h3>
-                        </a>
-                    </div>
-                    <div class="location-item">
-                        <a href="locations/croydon.html">
-                            <img src="images/croydon.svg" alt="Croydon" class="content-image">
-                            <h3>Locksmith in Croydon</h3>
-                        </a>
-                    </div>
-                    <div class="location-item">
-                        <a href="locations/harrow.html">
-                            <img src="images/harrow.svg" alt="Harrow" class="content-image">
-                            <h3>Locksmith in Harrow</h3>
-                        </a>
-                    </div>
-                    <div class="location-item">
-                        <a href="locations/west-london.html">
-                            <img src="images/west-london.svg" alt="West London" class="content-image">
-                            <h3>Locksmith in West London</h3>
-                        </a>
-                    </div>
-                    <div class="location-item">
-                        <a href="locations/north-london.html">
-                            <img src="images/north-london.svg" alt="North London" class="content-image">
-                            <h3>Locksmith in North London</h3>
-                        </a>
-                    </div>
-                    <div class="location-item">
-                        <a href="locations/north-west-london.html">
-                            <img src="images/north-west-london.svg" alt="North West London" class="content-image">
-                            <h3>Locksmith in North West London</h3>
-                        </a>
-                    </div>
-                    <div class="location-item">
-                        <a href="locations/east-london.html">
-                            <img src="images/east-london.svg" alt="East London" class="content-image">
-                            <h3>Locksmith in East London</h3>
-                        </a>
-                    </div>
-                    <div class="location-item">
-                        <a href="locations/south-west-london.html">
-                            <img src="images/south-west-london.svg" alt="South West London" class="content-image">
-                            <h3>Locksmith in South West London</h3>
-                        </a>
-                    </div>
-                    <div class="location-item">
-                        <a href="locations/south-east-london.html">
-                            <img src="images/south-east-london.svg" alt="South East London" class="content-image">
-                            <h3>Locksmith in South East London</h3>
-                        </a>
-                    </div>
-                    <div class="location-item">
-                        <a href="locations/watford.html">
-                            <img src="images/watford.svg" alt="Watford" class="content-image">
-                            <h3>Locksmith in Watford</h3>
-                        </a>
-                    </div>
-                    <div class="location-item">
-                        <a href="locations/enfield.html">
-                            <img src="images/enfield.svg" alt="Enfield" class="content-image">
-                            <h3>Locksmith in Enfield</h3>
-                        </a>
-                    </div>
-                    <div class="location-item">
-                        <a href="locations/uxbridge.html">
-                            <img src="images/uxbridge.svg" alt="Uxbridge" class="content-image">
-                            <h3>Locksmith in Uxbridge</h3>
-                        </a>
-                    </div>
-                    <div class="location-item">
-                        <a href="locations/ilford.html">
-                            <img src="images/ilford.svg" alt="Ilford" class="content-image">
-                            <h3>Locksmith in Ilford</h3>
-                        </a>
-                    </div>
-                    <div class="location-item">
-                        <a href="locations/romford.html">
-                            <img src="images/romford.svg" alt="Romford" class="content-image">
-                            <h3>Locksmith in Romford</h3>
-                        </a>
-                    </div>
-                    <div class="location-item">
-                        <a href="locations/hounslow.html">
-                            <img src="images/hounslow.svg" alt="Hounslow" class="content-image">
-                            <h3>Locksmith in Hounslow</h3>
-                        </a>
-                    </div>
-                    <div class="location-item">
-                        <a href="locations/dartford.html">
-                            <img src="images/dartford.svg" alt="Dartford" class="content-image">
-                            <h3>Locksmith in Dartford</h3>
-                        </a>
-                    </div>
-                    <div class="location-item">
-                        <a href="locations/kingston-upon-thames.html">
-                            <img src="images/kingston-upon-thames.svg" alt="Kingston upon Thames" class="content-image">
-                            <h3>Locksmith in Kingston upon Thames</h3>
-                        </a>
-                    </div>
-                    <div class="location-item">
-                        <a href="locations/sutton.html">
-                            <img src="images/sutton.svg" alt="Sutton" class="content-image">
-                            <h3>Locksmith in Sutton</h3>
-                        </a>
-                    </div>
-                    <div class="location-item">
-                        <a href="locations/bromley.html">
-                            <img src="images/bromley.svg" alt="Bromley" class="content-image">
-                            <h3>Locksmith in Bromley</h3>
-                        </a>
+                </div>
+                <div class="area-group">
+                    <h2 class="area-title">Surrounding Areas</h2>
+                    <div class="location-grid">
+                        <div class="location-item fade-in-element"><a href="locations/luton.html"><img src="images/luton.svg" alt="Luton"><h3>Luton</h3></a></div>
+                        <div class="location-item fade-in-element"><a href="locations/watford.html"><img src="images/watford.svg" alt="Watford"><h3>Watford</h3></a></div>
+                        <div class="location-item fade-in-element"><a href="locations/dartford.html"><img src="images/dartford.svg" alt="Dartford"><h3>Dartford</h3></a></div>
                     </div>
                 </div>
             </div>

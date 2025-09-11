@@ -571,9 +571,17 @@ footer h3 {
     padding: 3rem 0;
 }
 
-.locations-list h2 {
-    text-align: center;
-    margin-bottom: 2rem;
+.area-group {
+    margin-bottom: 3rem;
+}
+
+.area-title {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--accent-color);
+    text-align: left;
 }
 
 .location-grid {
@@ -586,20 +594,44 @@ footer h3 {
     display: none;
 }
 
-.location-item a {
-    display: block;
-    background-color: var(--light-gray);
-    padding: 2rem;
-    text-align: center;
-    border-radius: 5px;
+.location-item {
+    background-color: var(--secondary-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+.location-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 20px rgba(0,0,0,0.15);
+}
+
+.location-item a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem;
     color: var(--primary-color);
+    text-align: center;
+    height: 100%;
+    box-sizing: border-box;
 }
 
 .location-item a:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     color: var(--accent-color);
+}
+
+.location-item img {
+    height: 80px;
+    width: 80px;
+    margin-bottom: 1rem;
+    object-fit: contain;
+}
+
+.location-item h3 {
+    margin: 0;
+    font-size: 1.2rem;
 }
 
 /* Stats Section */
