@@ -142,13 +142,19 @@ header nav {
 
 /* Hero Section */
 .hero {
-    background-image: linear-gradient(rgba(10, 35, 66, 0.7), rgba(10, 35, 66, 0.7)), url(../images/hero-background.png);
+    background-image: linear-gradient(rgba(10, 35, 66, 0.7), rgba(10, 35, 66, 0.7)), url(../images/locksmith-fixing-a-door.jpg);
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain;
     background-position: center;
     color: var(--secondary-color);
-    padding: 8rem 0;
+    padding: 2rem 0;
     text-align: center;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--primary-color);
 }
 
 .hero h1 {
@@ -803,6 +809,43 @@ footer h3 {
 /* Locations Page Specific Styles */
 .locations-list {
     padding: 3rem 0;
+}
+
+.tag-cloud {
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.tag-cloud a {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem;
+    border-radius: 25px;
+    background-color: var(--light-gray);
+    color: var(--primary-color);
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.tag-cloud a:hover {
+    background-color: var(--accent-color);
+    color: var(--secondary-color);
+    transform: scale(1.1);
+}
+
+.tag-cloud .tag-large a {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.tag-cloud .tag-medium a {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.tag-cloud .tag-small a {
+    font-size: 1rem;
+    font-weight: 400;
 }
 
 .area-group {
