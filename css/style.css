@@ -64,7 +64,7 @@ header {
     border-bottom: 1px solid var(--light-gray);
     position: sticky;
     top: 0;
-    z-index: 1000;
+    z-index: 1100;
 }
 
 header .container {
@@ -1041,13 +1041,13 @@ footer h3 {
 .mobile-nav-toggle.is-active .hamburger::before {
     top: 0;
     transform: rotate(45deg);
-    background-color: var(--secondary-color);
+    background-color: var(--primary-color);
 }
 
 .mobile-nav-toggle.is-active .hamburger::after {
     bottom: 0;
     transform: rotate(-45deg);
-    background-color: var(--secondary-color);
+    background-color: var(--primary-color);
 }
 
 
