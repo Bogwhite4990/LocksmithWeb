@@ -31,8 +31,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const slider = document.querySelector('.testimonial-slider');
     if (slider) {
         const slides = document.querySelector('.testimonial-slides');
-        const prevBtn = document.querySelector('.prev-btn');
-        const nextBtn = document.querySelector('.next-btn');
         const slideCount = slides.children.length;
         let slideIndex = 0;
 
@@ -49,19 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
             showSlides();
         }
 
-        function prevSlide() {
-            slideIndex--;
-            if (slideIndex < 0) {
-                slideIndex = Math.ceil(slideCount / 3) - 1;
-            }
-            showSlides();
-        }
-
-        nextBtn.addEventListener('click', nextSlide);
-        prevBtn.addEventListener('click', prevSlide);
-
         setInterval(nextSlide, 5000); // Autoplay every 5 seconds
-
         window.addEventListener('resize', showSlides);
     }
 });
