@@ -14,7 +14,20 @@ const CONTACT_INFO = {
     }
 };
 
-document.addEventListener('DOMContentLoaded', function() {
+async function loadComponent(id, file) {
+    const container = document.getElementById(id);
+    if (container) {
+        const response = await fetch(file);
+        container.innerHTML = await response.text();
+    }
+}
+
+document.addEventListener('DOMContentLoaded', async function() {
+    await Promise.all([
+        loadComponent('navbar', '/navbar.html'),
+        loadComponent('footer', '/footer.html')
+    ]);
+
     // This script handles all the dynamic functionality for the website.
     const phoneDigits = CONTACT_INFO.phone.replace(/[^0-9]/g, '');
 
