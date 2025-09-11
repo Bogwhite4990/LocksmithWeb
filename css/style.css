@@ -422,6 +422,19 @@ footer {
     }
 }
 
+@media (min-width: 1024px) {
+    .brand-grid.single-line {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+    }
+
+    .brand-grid.single-line .brand {
+        width: auto;
+        flex: 1 0 100px;
+    }
+}
+
 /* Service Page Specific Styles */
 .hero-small {
     background-color: var(--primary-color);
