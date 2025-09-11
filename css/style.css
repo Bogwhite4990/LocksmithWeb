@@ -78,6 +78,13 @@ header .container {
     color: var(--primary-color);
 }
 
+.logo img {
+    width: 180px;   /* increase width */
+    height: 80px;   /* increase height */
+    object-fit: contain; /* keeps aspect ratio inside box */
+}
+
+
 header nav {
     display: none; /* Hidden on mobile */
 }
