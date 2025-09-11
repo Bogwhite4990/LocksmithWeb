@@ -174,10 +174,10 @@ header nav {
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
-.service-icon {
-    width: 60px;
-    height: 60px;
+.service-item i {
+    color: var(--accent-color);
     margin-bottom: 1rem;
+    display: inline-block;
 }
 
 .locations-overview {
