@@ -392,7 +392,7 @@ footer {
 }
 
 .service-description ul li::before {
-    content: '\\2713'; /* Checkmark */
+    content: '\2713'; /* Checkmark */
     color: var(--accent-color);
     position: absolute;
     left: 0;
