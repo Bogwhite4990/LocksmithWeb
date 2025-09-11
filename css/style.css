@@ -167,69 +167,22 @@ header nav {
     margin-bottom: 2rem;
 }
 
-.hero .phone-number span {
-    display: block;
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
-}
-
 .hero .phone-number a {
     font-size: 2.2rem;
     font-weight: 700;
     color: var(--accent-color);
-    padding: 0.25rem 0.75rem;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-    backdrop-filter: blur(2px);
-}
-
-.hero .tagline {
-    font-size: 1.1rem;
-    margin-bottom: 1.5rem;
-    color: var(--light-gray);
-}
-
-.hero-features {
-    list-style: none;
-    padding: 0;
-    margin: 1.5rem 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
-}
-
-.hero-features li {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    backdrop-filter: blur(2px);
-    font-size: 0.95rem;
 }
 
 .cta-button {
-    background: linear-gradient(135deg, var(--accent-color), #38b4a7);
+    background-color: var(--accent-color);
     color: var(--secondary-color);
     padding: 1rem 2rem;
     border-radius: 5px;
     font-family: var(--heading-font);
     font-weight: 700;
     text-transform: uppercase;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
+    display: inline-block;
     margin-top: 1rem;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: none;
-}
-
-.cta-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
 }
 
 /* Trust Signals */
