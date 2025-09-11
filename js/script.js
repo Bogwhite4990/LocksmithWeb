@@ -4,8 +4,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const mobileNav = document.querySelector('.mobile-nav');
 
     if (navToggle && mobileNav) {
+        navToggle.setAttribute('aria-expanded', 'false');
         navToggle.addEventListener('click', function() {
-            mobileNav.classList.toggle('is-active');
+            const isActive = mobileNav.classList.toggle('is-active');
+            navToggle.classList.toggle('is-active', isActive);
+            navToggle.setAttribute('aria-expanded', isActive);
         });
     }
 

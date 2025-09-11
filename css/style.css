@@ -123,16 +123,29 @@ header nav {
 }
 
 @media (max-width: 768px) {
+    header .container {
+        justify-content: flex-start;
+    }
     .header-phone {
-        width: 100%;
+        width: auto;
+        margin-left: auto;
         justify-content: center;
         margin-top: 0.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    .mobile-nav-toggle {
+        margin-left: 0.5rem;
     }
 }
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(rgba(10, 35, 66, 0.7), rgba(10, 35, 66, 0.7)), url(../images/hero-background.png) no-repeat center center/cover;
+    background-image: linear-gradient(rgba(10, 35, 66, 0.7), rgba(10, 35, 66, 0.7)), url(../images/hero-background.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
     color: var(--secondary-color);
     padding: 8rem 0;
     text-align: center;
@@ -297,17 +310,16 @@ header nav {
 .testimonial-slides-container {
     position: relative;
     width: 100%;
-    height: 250px; /* Adjust as needed */
     overflow: hidden;
+    min-height: 250px;
 }
 
 .testimonial-slides {
     display: flex;
     transition: transform 0.5s ease-in-out;
     transform-style: preserve-3d;
-    position: absolute;
+    position: relative;
     width: 100%;
-    height: 100%;
 }
 
 .testimonial-slide {
@@ -316,9 +328,7 @@ header nav {
     background-color: rgba(12, 42, 76, 0.5); /* Slightly lighter blue with opacity */
     border-radius: 5px;
     box-sizing: border-box;
-    position: absolute;
-    top: 0;
-    left: 0;
+    position: relative;
     width: 100%;
     display: none; /* Hide slides by default */
 }
