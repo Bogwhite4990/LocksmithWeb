@@ -142,7 +142,7 @@ header nav {
 
 /* Hero Section */
 .hero {
-    background-image: linear-gradient(rgba(10, 35, 66, 0.7), rgba(10, 35, 66, 0.7)), url(../images/hero-background.png);
+    background-image: linear-gradient(rgba(10, 35, 66, 0.7), rgba(10, 35, 66, 0.7)), url(../images/locksmith-fixing-a-door.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -302,9 +302,15 @@ header nav {
     width: 100%;
     background-color: var(--primary-color);
     color: var(--secondary-color);
-    padding: 2rem;
+    padding: 1rem;
     border-radius: 5px;
     perspective: 1000px;
+}
+
+@media (min-width: 768px) {
+    .testimonial-slider {
+        padding: 2rem;
+    }
 }
 
 .testimonial-slides-container {
@@ -324,13 +330,19 @@ header nav {
 
 .testimonial-slide {
     flex: 0 0 100%;
-    padding: 1.5rem;
+    padding: 1rem;
     background-color: rgba(12, 42, 76, 0.5); /* Slightly lighter blue with opacity */
     border-radius: 5px;
     box-sizing: border-box;
     position: relative;
     width: 100%;
     display: none; /* Hide slides by default */
+}
+
+@media (min-width: 768px) {
+    .testimonial-slide {
+        padding: 1.5rem;
+    }
 }
 
 .testimonial-slide.active {
@@ -383,12 +395,38 @@ header nav {
     background-color: rgba(255, 255, 255, 0.2);
     border: none;
     color: white;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     cursor: pointer;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 0.8rem;
     border-radius: 5px;
     pointer-events: all;
     transition: background-color 0.3s ease;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.prev-slide {
+    left: 5px;
+}
+
+.next-slide {
+    right: 5px;
+}
+
+@media (min-width: 768px) {
+    .prev-slide, .next-slide {
+        font-size: 1.5rem;
+        padding: 0.5rem 1rem;
+    }
+
+    .prev-slide {
+        left: 10px;
+    }
+
+    .next-slide {
+        right: 10px;
+    }
 }
 
 .prev-slide:hover, .next-slide:hover {
@@ -943,8 +981,54 @@ footer h3 {
     font-size: 1.5rem;
     cursor: pointer;
     color: var(--primary-color);
-    z-index: 1001;
+    z-index: 1003; /* Ensure it's above the mobile nav */
+    position: relative; /* Needed for z-index and pseudo-elements */
+    width: 30px;
+    height: 22px;
+    transition: all 0.3s ease;
 }
+
+.mobile-nav-toggle .hamburger,
+.mobile-nav-toggle .hamburger::before,
+.mobile-nav-toggle .hamburger::after {
+    content: '';
+    position: absolute;
+    background-color: var(--primary-color);
+    width: 100%;
+    height: 3px;
+    left: 0;
+    transition: all 0.3s ease;
+}
+
+.mobile-nav-toggle .hamburger {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.mobile-nav-toggle .hamburger::before {
+    top: -8px;
+}
+
+.mobile-nav-toggle .hamburger::after {
+    bottom: -8px;
+}
+
+.mobile-nav-toggle.is-active .hamburger {
+    background-color: transparent;
+}
+
+.mobile-nav-toggle.is-active .hamburger::before {
+    top: 0;
+    transform: rotate(45deg);
+    background-color: var(--secondary-color);
+}
+
+.mobile-nav-toggle.is-active .hamburger::after {
+    bottom: 0;
+    transform: rotate(-45deg);
+    background-color: var(--secondary-color);
+}
+
 
 .mobile-nav {
     display: none;
@@ -952,6 +1036,7 @@ footer h3 {
     top: 0;
     right: 0;
     width: 80%;
+    max-width: 300px;
     height: 100vh;
     background-color: var(--primary-color);
     padding-top: 4rem;
