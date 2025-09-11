@@ -1,4 +1,45 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Apply global site configuration
+    if (window.siteConfig) {
+        const cfg = window.siteConfig;
+
+        document.querySelectorAll('[data-site-name]').forEach(el => {
+            el.textContent = cfg.siteName;
+        });
+
+        document.querySelectorAll('[data-phone]').forEach(el => {
+            el.textContent = cfg.phone;
+            if (el.tagName === 'A') {
+                el.setAttribute('href', `tel:${cfg.phone}`);
+            }
+        });
+
+        document.querySelectorAll('[data-email]').forEach(el => {
+            el.textContent = cfg.email;
+            if (el.tagName === 'A') {
+                el.setAttribute('href', `mailto:${cfg.email}`);
+            }
+        });
+
+        document.querySelectorAll('[data-address]').forEach(el => {
+            el.textContent = cfg.address;
+        });
+
+        document.querySelectorAll('script[type="application/ld+json"]').forEach(tag => {
+            try {
+                const data = JSON.parse(tag.textContent);
+                if (cfg.siteName) data.name = cfg.siteName;
+                if (cfg.phone) data.telephone = cfg.phone;
+                if (cfg.email) data.email = cfg.email;
+                if (data.address && typeof data.address === 'object') {
+                    if ('streetAddress' in data.address) {
+                        data.address.streetAddress = cfg.address;
+                    }
+                }
+                tag.textContent = JSON.stringify(data, null, 2);
+            } catch (e) {}
+        });
+    }
     // Mobile navigation toggle
     const navToggle = document.querySelector('.mobile-nav-toggle');
     const mobileNav = document.querySelector('.mobile-nav');
