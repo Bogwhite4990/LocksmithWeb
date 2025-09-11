@@ -281,7 +281,7 @@ header nav {
 .testimonials h2 {
     text-align: center;
     margin-bottom: 2rem;
-    color: var(--secondary-color);
+    color: var(--primary-color);
 }
 
 .testimonial-slider {
@@ -305,6 +305,17 @@ header nav {
     background-color: #0c2a4c; /* Slightly lighter blue */
     border-radius: 5px;
     box-sizing: border-box;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.testimonial-slide.active {
+    opacity: 1;
+    position: relative;
 }
 
 .testimonial-slide .stars {
@@ -320,11 +331,103 @@ header nav {
     color: var(--accent-color);
 }
 
+.testimonial-slider {
+    min-height: 250px; /* Adjust as needed */
+}
+
 @media (min-width: 768px) {
     .testimonial-slide {
-        flex: 0 0 calc(100% / 3);
+        flex: 0 0 100%; /* Each slide takes full width */
     }
 }
+
+.slider-controls {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none;
+}
+
+.prev-slide, .next-slide {
+    background-color: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    pointer-events: all;
+    transition: background-color 0.3s ease;
+}
+
+.prev-slide:hover, .next-slide:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+/* FAQ Section */
+.faq-section {
+    padding: 3rem 0;
+    background-color: var(--light-gray);
+}
+
+.faq-section h2 {
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.faq-subheading {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--accent-color);
+    font-weight: 500;
+}
+
+.faq-grid {
+    display: grid;
+    gap: 1rem;
+}
+
+.faq-item {
+    background-color: var(--secondary-color);
+    border-radius: 5px;
+    border: 1px solid #e0e0e0;
+}
+
+.faq-item summary {
+    padding: 1rem 1.5rem;
+    font-weight: 700;
+    cursor: pointer;
+    position: relative;
+    list-style: none; /* Remove default marker */
+}
+
+.faq-item summary::-webkit-details-marker {
+    display: none; /* For Chrome/Safari */
+}
+
+.faq-item summary::after {
+    content: '+';
+    position: absolute;
+    right: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.faq-item[open] summary::after {
+    transform: translateY(-50%) rotate(45deg);
+}
+
+.faq-item p {
+    padding: 0 1.5rem 1rem;
+    margin: 0;
+    line-height: 1.7;
+}
+
 
 /* Contact Section */
 .contact-section {
@@ -694,6 +797,29 @@ footer h3 {
 }
 
 /* Area Coverage */
+/* Trusted Locksmith Services Section */
+.trusted-locksmith-services {
+    padding: 3rem 0;
+}
+
+.trusted-services-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    align-items: center;
+}
+
+.trusted-services-image img {
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+@media (min-width: 768px) {
+    .trusted-services-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
 .area-coverage {
     padding: 3rem 0;
     background-color: var(--light-gray);
