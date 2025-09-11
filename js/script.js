@@ -1,5 +1,5 @@
 const CONTACT_INFO = {
-    phone: '0123-456-7890',
+    phone: '0123-456-7899',
     email: 'contact@locksmith.com',
     address: {
         street: '123 Locking St',
