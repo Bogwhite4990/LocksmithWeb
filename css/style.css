@@ -244,27 +244,6 @@ header nav {
     color: var(--accent-color);
 }
 
-.slider-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(255, 255, 255, 0.1);
-    border: none;
-    color: var(--secondary-color);
-    font-size: 2rem;
-    cursor: pointer;
-    padding: 0.5rem 1rem;
-    z-index: 10;
-}
-
-.prev-btn {
-    left: 10px;
-}
-
-.next-btn {
-    right: 10px;
-}
-
 @media (min-width: 768px) {
     .testimonial-slide {
         flex: 0 0 calc(100% / 3);
@@ -395,6 +374,12 @@ footer {
     padding: 3rem 0;
 }
 
+.service-description {
+    background-color: var(--light-gray);
+    padding: 2rem;
+    border-radius: 5px;
+}
+
 .service-description ul {
     list-style: none;
     padding-left: 0;
@@ -430,6 +415,13 @@ footer {
     display: flex;
     flex-direction: column;
     gap: 3rem;
+}
+
+.contact-form-container,
+.contact-info-container {
+    background-color: var(--light-gray);
+    padding: 2rem;
+    border-radius: 5px;
 }
 
 .contact-details {
