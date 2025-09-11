@@ -192,8 +192,6 @@ header nav {
 
 /* Testimonials */
 .testimonials {
-    background-color: var(--primary-color);
-    color: var(--secondary-color);
     padding: 3rem 0;
 }
 
@@ -207,6 +205,28 @@ header nav {
     background-color: #0c2a4c; /* Slightly lighter blue */
     padding: 1.5rem;
     border-radius: 5px;
+    margin-bottom: 1rem;
+}
+
+.testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    padding: 2rem;
+    border-radius: 5px;
+}
+
+.testimonial {
+    background-color: #0c2a4c; /* Slightly lighter blue */
+    padding: 1.5rem;
+    border-radius: 5px;
+    color: var(--secondary-color);
+}
+
+.testimonial .stars {
+    color: #ffc107; /* Gold color for stars */
     margin-bottom: 1rem;
 }
 
