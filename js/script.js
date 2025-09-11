@@ -14,9 +14,17 @@ const CONTACT_INFO = {
     }
 };
 
-document.addEventListener('DOMContentLoaded', function() {
+let BASE_PATH = './';
+
+function initializeSite() {
     // This script handles all the dynamic functionality for the website.
     const phoneDigits = CONTACT_INFO.phone.replace(/[^0-9]/g, '');
+
+    if (BASE_PATH !== './') {
+        document.querySelectorAll('a[data-root]').forEach(a => {
+            a.setAttribute('href', BASE_PATH + a.getAttribute('href'));
+        });
+    }
 
     // Mobile navigation toggle
     const navToggle = document.querySelector('.mobile-nav-toggle');
@@ -214,4 +222,19 @@ document.addEventListener('DOMContentLoaded', function() {
     whatsappBtn.setAttribute('aria-label', 'Chat on WhatsApp');
     whatsappBtn.innerHTML = '<i class="fab fa-whatsapp"></i>';
     document.body.appendChild(whatsappBtn);
+}
+
+function loadComponent(selector, url) {
+    const container = document.querySelector(selector);
+    if (!container) return Promise.resolve();
+    return fetch(url).then(res => res.text()).then(html => { container.outerHTML = html; });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const depth = window.location.pathname.replace(/\/$/, '').split('/').length - 2;
+    BASE_PATH = depth > 0 ? '../'.repeat(depth) : './';
+    Promise.all([
+        loadComponent('#navbar', BASE_PATH + 'navbar.html'),
+        loadComponent('#footer', BASE_PATH + 'footer.html')
+    ]).then(initializeSite);
 });
