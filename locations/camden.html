@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Locksmith in Camden - Your Local Technician</title>
-    <meta name="description" content="Need a locksmith in Camden? We offer 24/7 emergency services, lock changes, and security upgrades throughout the Camden area.">
+    <title>Locksmith in Camden - 24/7 Service</title>
+    <meta name="description" content="Need a locksmith in Camden? We offer fast, reliable 24/7 locksmith services throughout the Camden area. Call for a 15-30 minute response.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Locksmith",
-      "name": "Locksmith Camden",
+      "name": "Locksmith in Camden",
       "image": "https://www.example.com/logo.jpg",
       "@id": "",
       "url": "https://www.example.com/locations/camden.html",
@@ -22,14 +22,18 @@
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "123 Locking St",
-        "addressLocality": "Camden",
-        "postalCode": "NW1 0AP",
+        "addressLocality": "London",
+        "postalCode": "E1 6AN",
         "addressCountry": "UK"
       },
+      "areaServed": {
+        "@type": "Place",
+        "name": "Camden"
+       },
       "geo": {
         "@type": "GeoCoordinates",
-        "latitude": 51.5399,
-        "longitude": -0.1427
+        "latitude": 51.5398,
+        "longitude": -0.1426
       },
       "openingHoursSpecification": {
         "@type": "OpeningHoursSpecification",
@@ -54,7 +58,36 @@
 </head>
 <body>
 
-    <main class="service-page">
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="../index.html">Locksmith</a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../services.html">Services</a></li>
+                    <li><a href="../locations.html">Locations</a></li>
+                    <li><a href="../contact.html">Contact Us</a></li>
+                </ul>
+            </nav>
+            <div class="header-phone">
+                <a href="tel:0123-456-7890">Call Us: 0123-456-7890</a>
+            </div>
+            <button class="mobile-nav-toggle">&#9776;</button>
+        </div>
+    </header>
+
+    <nav class="mobile-nav">
+        <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../services.html">Services</a></li>
+            <li><a href="../locations.html">Locations</a></li>
+            <li><a href="../contact.html">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <main class="service-page"> <!-- Reusing service-page class for consistent styling -->
         <section class="hero-small">
             <div class="container">
                 <h1>Locksmith in Camden</h1>
@@ -64,26 +97,61 @@
         <section class="service-content">
             <div class="container">
                 <div class="service-description">
-                    <h2>Your Trusted Locksmith in the London Borough of Camden</h2>
-                    <p>Welcome to your dedicated local locksmith service for Camden. We are proud to serve the residents and businesses of this vibrant borough, from Camden Town to Hampstead Heath.</p>
-                    <p>Our experienced locksmiths are familiar with the area and can reach you quickly, whether you're near the British Museum or closer to Regent's Park. We offer a full range of services, including:</p>
+                    <h2>Your Trusted Locksmith in Camden</h2>
+                    <p>If you're in Camden and need a fast, professional locksmith, you've come to the right place. We are proud to serve the entire Camden area, providing a full range of locksmith services to residents and businesses. Our local technicians can be with you in just 15-30 minutes.</p>
+                    <p>We know the Camden area well, from Camden Town to Hampstead, and can navigate the streets quickly to get to you when you need us most. Our services in Camden include:</p>
                     <ul>
-                        <li>24/7 emergency lockout assistance</li>
-                        <li>Residential and commercial lock changes</li>
-                        <li>High-security lock installations</li>
-                        <li>Burglary repair services</li>
+                        <li>24/7 Emergency Lockouts</li>
+                        <li>Lock Changes and Repairs</li>
+                        <li>Home and Business Security Upgrades</li>
+                        <li>UPVC Door and Window Lock Services</li>
+                        <li>And much more...</li>
                     </ul>
                 </div>
                 <div class="service-cta">
                     <h3>Need a Locksmith in Camden?</h3>
-                    <p>For a fast, reliable, and professional service, call us now.</p>
+                    <p>We're just a phone call away. Contact us for immediate service.</p>
                     <a href="tel:0123-456-7890" class="cta-button">Call Now: 0123-456-7890</a>
                 </div>
             </div>
         </section>
     </main>
 
-    <script src="/js/script.js"></script>
-    <script src="/js/templating.js"></script>
+    <footer>
+        <!-- Footer is identical to other pages -->
+        <div class="container">
+            <div class="footer-flex">
+                <div class="footer-about">
+                    <h3>Locksmith</h3>
+                    <p>Your local, reliable locksmith service. Available 24/7 for all your locksmith needs.</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../services.html">Services</a></li>
+                        <li><a href="../locations.html">Locations</a></li>
+                        <li><a href="../contact.html">Contact Us</a></li>
+                        <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact Us</h3>
+                    <p>Call Us: <a href="tel:0123-456-7890">0123-456-7890</a></p>
+                    <p>Email: <a href="mailto:contact@locksmith.com">contact@locksmith.com</a></p>
+                    <div class="social-media">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Locksmith. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
 </body>
 </html>

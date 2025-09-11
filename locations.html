@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="css/style.css">
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -54,6 +54,35 @@
 </head>
 <body>
 
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">Locksmith</a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="locations.html">Locations</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </nav>
+            <div class="header-phone">
+                <a href="tel:0123-456-7890">Call Us: 0123-456-7890</a>
+            </div>
+            <button class="mobile-nav-toggle">&#9776;</button>
+        </div>
+    </header>
+
+    <nav class="mobile-nav">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="locations.html">Locations</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+    </nav>
+
     <main class="service-page">
         <section class="hero-small">
             <div class="container">
@@ -65,44 +94,55 @@
             <div class="container">
                 <h2>Find Your Local Locksmith</h2>
                 <div class="location-grid">
-                    <div class="location-item"><a href="/locations/islington.html"><h3>Locksmith in Islington</h3></a></div>
-                    <div class="location-item"><a href="/locations/camden.html"><h3>Locksmith in Camden</h3></a></div>
-                    <div class="location-item"><a href="/locations/westminster.html"><h3>Locksmith in Westminster</h3></a></div>
-                    <div class="location-item"><a href="/locations/barking-and-dagenham.html"><h3>Locksmith in Barking and Dagenham</h3></a></div>
-                    <div class="location-item"><a href="/locations/barnet.html"><h3>Locksmith in Barnet</h3></a></div>
-                    <div class="location-item"><a href="/locations/bexley.html"><h3>Locksmith in Bexley</h3></a></div>
-                    <div class="location-item"><a href="/locations/brent.html"><h3>Locksmith in Brent</h3></a></div>
-                    <div class="location-item"><a href="/locations/bromley.html"><h3>Locksmith in Bromley</h3></a></div>
-                    <div class="location-item"><a href="/locations/croydon.html"><h3>Locksmith in Croydon</h3></a></div>
-                    <div class="location-item"><a href="/locations/ealing.html"><h3>Locksmith in Ealing</h3></a></div>
-                    <div class="location-item"><a href="/locations/enfield.html"><h3>Locksmith in Enfield</h3></a></div>
-                    <div class="location-item"><a href="/locations/greenwich.html"><h3>Locksmith in Greenwich</h3></a></div>
-                    <div class="location-item"><a href="/locations/hackney.html"><h3>Locksmith in Hackney</h3></a></div>
-                    <div class="location-item"><a href="/locations/hammersmith-and-fulham.html"><h3>Locksmith in Hammersmith and Fulham</h3></a></div>
-                    <div class="location-item"><a href="/locations/haringey.html"><h3>Locksmith in Haringey</h3></a></div>
-                    <div class="location-item"><a href="/locations/harrow.html"><h3>Locksmith in Harrow</h3></a></div>
-                    <div class="location-item"><a href="/locations/havering.html"><h3>Locksmith in Havering</h3></a></div>
-                    <div class="location-item"><a href="/locations/hillingdon.html"><h3>Locksmith in Hillingdon</h3></a></div>
-                    <div class="location-item"><a href="/locations/hounslow.html"><h3>Locksmith in Hounslow</h3></a></div>
-                    <div class="location-item"><a href="/locations/kensington-and-chelsea.html"><h3>Locksmith in Kensington and Chelsea</h3></a></div>
-                    <div class="location-item"><a href="/locations/kingston-upon-thames.html"><h3>Locksmith in Kingston upon Thames</h3></a></div>
-                    <div class="location-item"><a href="/locations/lambeth.html"><h3>Locksmith in Lambeth</h3></a></div>
-                    <div class="location-item"><a href="/locations/lewisham.html"><h3>Locksmith in Lewisham</h3></a></div>
-                    <div class="location-item"><a href="/locations/merton.html"><h3>Locksmith in Merton</h3></a></div>
-                    <div class="location-item"><a href="/locations/newham.html"><h3>Locksmith in Newham</h3></a></div>
-                    <div class="location-item"><a href="/locations/redbridge.html"><h3>Locksmith in Redbridge</h3></a></div>
-                    <div class="location-item"><a href="/locations/richmond-upon-thames.html"><h3>Locksmith in Richmond upon Thames</h3></a></div>
-                    <div class="location-item"><a href="/locations/southwark.html"><h3>Locksmith in Southwark</h3></a></div>
-                    <div class="location-item"><a href="/locations/sutton.html"><h3>Locksmith in Sutton</h3></a></div>
-                    <div class="location-item"><a href="/locations/tower-hamlets.html"><h3>Locksmith in Tower Hamlets</h3></a></div>
-                    <div class="location-item"><a href="/locations/waltham-forest.html"><h3>Locksmith in Waltham Forest</h3></a></div>
-                    <div class="location-item"><a href="/locations/wandsworth.html"><h3>Locksmith in Wandsworth</h3></a></div>
+                    <div class="location-item">
+                        <a href="locations/islington.html">
+                            <h3>Locksmith in Islington</h3>
+                        </a>
+                    </div>
+                    <div class="location-item">
+                        <a href="locations/camden.html">
+                            <h3>Locksmith in Camden</h3>
+                        </a>
+                    </div>
+                    <div class="location-item">
+                        <a href="locations/westminster.html">
+                            <h3>Locksmith in Westminster</h3>
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <script src="/js/script.js"></script>
-    <script src="/js/templating.js"></script>
+    <footer>
+        <div class="container">
+            <div class="footer-flex">
+                <div class="footer-about">
+                    <h3>Locksmith</h3>
+                    <p>Your local, reliable locksmith service. Available 24/7 for all your locksmith needs.</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="locations.html">Locations</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact Us</h3>
+                    <p>Call Us: <a href="tel:0123-456-7890">0123-456-7890</a></p>
+                    <p>Email: <a href="mailto:contact@locksmith.com">contact@locksmith.com</a></p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Locksmith. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
 </body>
 </html>
