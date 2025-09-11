@@ -142,7 +142,7 @@ header nav {
 
 /* Hero Section */
 .hero {
-    background-image: linear-gradient(rgba(10, 35, 66, 0.7), rgba(10, 35, 66, 0.7)), url(../images/locksmith-fixing-a-door.jpg);
+    background-image: linear-gradient(rgba(10, 35, 66, 0.7), rgba(10, 35, 66, 0.7)), url(../images/hero-background.png);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
