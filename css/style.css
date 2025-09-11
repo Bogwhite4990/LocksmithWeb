@@ -580,6 +580,14 @@ footer h3 {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 1.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    grid-auto-rows: 1fr;
+}
+
+.location-item {
+    display: flex;
 }
 
 .location-item.hidden {
@@ -587,13 +595,17 @@ footer h3 {
 }
 
 .location-item a {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     background-color: var(--light-gray);
     padding: 2rem;
     text-align: center;
     border-radius: 5px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     color: var(--primary-color);
+    height: 100%;
 }
 
 .location-item a:hover {
