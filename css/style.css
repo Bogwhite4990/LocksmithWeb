@@ -144,11 +144,12 @@ header nav {
 .hero {
     background-image: linear-gradient(rgba(10, 35, 66, 0.7), rgba(10, 35, 66, 0.7)), url(../images/hero-background.png);
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain;
     background-position: center;
     color: var(--secondary-color);
     padding: 8rem 0;
     text-align: center;
+    min-height: 100vh;
 }
 
 .hero h1 {
