@@ -28,12 +28,20 @@ document.addEventListener('DOMContentLoaded', function() {
         a.href = `tel:${phoneDigits}`;
         if (/\d/.test(a.textContent)) {
             a.textContent = a.textContent.replace(/[\d\-\s]+/, CONTACT_INFO.phone);
+        } else if (a.textContent.trim() !== '') {
+            a.textContent = `${a.textContent.trim()} ${CONTACT_INFO.phone}`.trim();
+        } else {
+            a.textContent = CONTACT_INFO.phone;
         }
     });
 
     document.querySelectorAll('a[href^="mailto:"]').forEach(a => {
         a.href = `mailto:${CONTACT_INFO.email}`;
         if (a.textContent.includes('@')) {
+            a.textContent = CONTACT_INFO.email;
+        } else if (a.textContent.trim() !== '') {
+            a.textContent = `${a.textContent.trim()} ${CONTACT_INFO.email}`.trim();
+        } else {
             a.textContent = CONTACT_INFO.email;
         }
     });
