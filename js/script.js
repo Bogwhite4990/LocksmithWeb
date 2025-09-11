@@ -30,7 +30,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Testimonial Slider
     const slider = document.querySelector('.testimonial-slider');
     if (slider) {
-        const slides = slider.querySelectorAll('.testimonial-slide');
+        const slidesContainer = slider.querySelector('.testimonial-slides');
+        const slides = slidesContainer.querySelectorAll('.testimonial-slide');
         const nextBtn = slider.querySelector('.next-slide');
         const prevBtn = slider.querySelector('.prev-slide');
         let currentSlide = 0;
@@ -38,9 +39,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
         function showSlide(index) {
             slides.forEach((slide, i) => {
-                slide.classList.remove('active');
-                if (i === index) {
+                slide.classList.remove('active', 'prev', 'next');
+                let newIndex = i - index;
+                if (newIndex < 0) newIndex += slides.length;
+                if (newIndex === 0) {
                     slide.classList.add('active');
+                } else if (newIndex === 1 || newIndex === -slides.length + 1) {
+                    slide.classList.add('next');
+                } else if (newIndex === slides.length - 1 || newIndex === -1) {
+                    slide.classList.add('prev');
                 }
             });
         }
