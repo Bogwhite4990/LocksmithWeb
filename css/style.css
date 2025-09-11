@@ -71,6 +71,7 @@ header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .logo a {
@@ -95,6 +96,7 @@ header nav {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    flex-wrap: wrap;
 }
 
 .header-phone a {
@@ -105,14 +107,27 @@ header nav {
     border-radius: 5px;
 }
 
+.header-social {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
 .header-social a {
     color: var(--primary-color);
     font-size: 1.2rem;
-    margin-left: 0.3rem;
 }
 
 .header-social a:hover {
     color: var(--accent-color);
+}
+
+@media (max-width: 768px) {
+    .header-phone {
+        width: 100%;
+        justify-content: center;
+        margin-top: 0.5rem;
+    }
 }
 
 /* Hero Section */
@@ -728,6 +743,7 @@ footer {
     background-color: var(--primary-color);
     padding-top: 4rem;
     text-align: center;
+    z-index: 1002;
 }
 
 .mobile-nav.is-active {
@@ -756,6 +772,22 @@ footer {
 }
 
 /* Animation Styles */
+.service-extra,
+.service-guarantee p {
+    background: linear-gradient(90deg, var(--accent-color), var(--primary-color), var(--accent-color));
+    background-size: 200% auto;
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: textShine 3s linear infinite;
+    font-weight: 600;
+}
+
+@keyframes textShine {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+}
+
 .fade-in-element {
     opacity: 0;
     transform: translateY(20px);
