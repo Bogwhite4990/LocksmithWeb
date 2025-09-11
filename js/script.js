@@ -22,6 +22,30 @@ document.addEventListener('DOMContentLoaded', function() {
     const navToggle = document.querySelector('.mobile-nav-toggle');
     const mobileNav = document.querySelector('.mobile-nav');
     const header = document.querySelector('header');
+    const logo = header ? header.querySelector('.logo') : null;
+
+    const themeToggle = document.createElement('button');
+    themeToggle.className = 'theme-toggle';
+    themeToggle.setAttribute('aria-label', 'Toggle dark mode');
+    themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+    if (logo) {
+        logo.appendChild(themeToggle);
+    }
+
+    const setTheme = mode => {
+        document.body.classList.toggle('dark-mode', mode === 'dark');
+        themeToggle.innerHTML = mode === 'dark'
+            ? '<i class="fas fa-sun"></i>'
+            : '<i class="fas fa-moon"></i>';
+    };
+
+    setTheme(localStorage.getItem('theme') || 'light');
+
+    themeToggle.addEventListener('click', () => {
+        const newTheme = document.body.classList.contains('dark-mode') ? 'light' : 'dark';
+        setTheme(newTheme);
+        localStorage.setItem('theme', newTheme);
+    });
 
     // Update contact information across the page
     document.querySelectorAll('a[href^="tel:"]').forEach(a => {
