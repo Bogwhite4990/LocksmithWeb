@@ -14,7 +14,7 @@ const CONTACT_INFO = {
     }
 };
 
-document.addEventListener('DOMContentLoaded', function() {
+function initPage() {
     // This script handles all the dynamic functionality for the website.
     const phoneDigits = CONTACT_INFO.phone.replace(/[^0-9]/g, '');
 
@@ -214,4 +214,14 @@ document.addEventListener('DOMContentLoaded', function() {
     whatsappBtn.setAttribute('aria-label', 'Chat on WhatsApp');
     whatsappBtn.innerHTML = '<i class="fab fa-whatsapp"></i>';
     document.body.appendChild(whatsappBtn);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const navPromise = fetch('/nav.html').then(r => r.text()).then(html => {
+        document.body.insertAdjacentHTML('afterbegin', html);
+    });
+    const footerPromise = fetch('/footer.html').then(r => r.text()).then(html => {
+        document.body.insertAdjacentHTML('beforeend', html);
+    });
+    Promise.all([navPromise, footerPromise]).then(initPage);
 });
