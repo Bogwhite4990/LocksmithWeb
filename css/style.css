@@ -433,6 +433,27 @@ header nav {
     background-color: rgba(255, 255, 255, 0.4);
 }
 
+@media (max-width: 600px) {
+    .testimonial-slider {
+        padding-bottom: 2.5rem; /* Room for slider controls */
+    }
+
+    .slider-controls {
+        top: auto;
+        bottom: 0.5rem;
+        transform: none;
+    }
+
+    .prev-slide,
+    .next-slide {
+        top: auto;
+        bottom: 0;
+        transform: none;
+        font-size: 1rem;
+        padding: 0.3rem 0.6rem;
+    }
+}
+
 /* FAQ Section */
 .faq-section {
     padding: 3rem 0;
