@@ -313,11 +313,10 @@ header nav {
 .testimonial-slide {
     flex: 0 0 100%;
     padding: 1.5rem;
-    background-color: #0c2a4c; /* Slightly lighter blue */
+    background-color: rgba(12, 42, 76, 0.5); /* Slightly lighter blue with opacity */
     border-radius: 5px;
     box-sizing: border-box;
-    opacity: 0.5;
-    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    transition: transform 0.5s ease-in-out, background-color 0.5s ease-in-out;
     position: absolute;
     top: 0;
     left: 0;
@@ -326,7 +325,7 @@ header nav {
 }
 
 .testimonial-slide.active {
-    opacity: 1;
+    background-color: #0c2a4c;
     position: relative;
     transform: scale(1) rotateY(0);
     z-index: 2;
@@ -334,13 +333,11 @@ header nav {
 
 .testimonial-slide.prev {
     transform: translateX(-50%) scale(0.8) rotateY(-30deg);
-    opacity: 0.5;
     z-index: 1;
 }
 
 .testimonial-slide.next {
     transform: translateX(50%) scale(0.8) rotateY(30deg);
-    opacity: 0.5;
     z-index: 1;
 }
 
