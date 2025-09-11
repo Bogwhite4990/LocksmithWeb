@@ -30,25 +30,56 @@ document.addEventListener('DOMContentLoaded', function() {
     // Testimonial Slider
     const slider = document.querySelector('.testimonial-slider');
     if (slider) {
-        const slides = document.querySelector('.testimonial-slides');
-        const slideCount = slides.children.length;
-        let slideIndex = 0;
+        const slides = slider.querySelectorAll('.testimonial-slide');
+        const nextBtn = slider.querySelector('.next-slide');
+        const prevBtn = slider.querySelector('.prev-slide');
+        let currentSlide = 0;
+        let slideInterval;
 
-        function showSlides() {
-            const slideWidth = slides.children[0].getBoundingClientRect().width;
-            slides.style.transform = `translateX(-${slideIndex * slideWidth * 3}px)`;
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active');
+                if (i === index) {
+                    slide.classList.add('active');
+                }
+            });
         }
 
         function nextSlide() {
-            slideIndex++;
-            if (slideIndex >= Math.ceil(slideCount / 3)) {
-                slideIndex = 0;
-            }
-            showSlides();
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
         }
 
-        setInterval(nextSlide, 5000); // Autoplay every 5 seconds
-        window.addEventListener('resize', showSlides);
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        function startSlider() {
+            slideInterval = setInterval(nextSlide, 5000); // Autoplay every 5 seconds
+        }
+
+        function stopSlider() {
+            clearInterval(slideInterval);
+        }
+
+        if (nextBtn && prevBtn) {
+            nextBtn.addEventListener('click', () => {
+                stopSlider();
+                nextSlide();
+                startSlider();
+            });
+
+            prevBtn.addEventListener('click', () => {
+                stopSlider();
+                prevSlide();
+                startSlider();
+            });
+        }
+
+        // Initially show the first slide and start the slider
+        showSlide(currentSlide);
+        startSlider();
     }
 
     // Reveal all locations on index page
