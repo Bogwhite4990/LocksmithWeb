@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // This script handles all the dynamic functionality for the website.
+
     // Mobile navigation toggle
     const navToggle = document.querySelector('.mobile-nav-toggle');
     const mobileNav = document.querySelector('.mobile-nav');
