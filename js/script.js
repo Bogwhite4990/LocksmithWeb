@@ -77,4 +77,19 @@ document.addEventListener('DOMContentLoaded', function() {
         };
         updateCount();
     });
+
+    // Floating phone bubble and WhatsApp chat button
+    const phoneBubble = document.createElement('div');
+    phoneBubble.className = 'phone-bubble';
+    phoneBubble.innerHTML = '<a href="tel:0123-456-7890">0123-456-7890</a>';
+    document.body.appendChild(phoneBubble);
+
+    const whatsappBtn = document.createElement('a');
+    whatsappBtn.className = 'whatsapp-chat';
+    whatsappBtn.href = 'https://wa.me/01234567890';
+    whatsappBtn.target = '_blank';
+    whatsappBtn.rel = 'noopener';
+    whatsappBtn.setAttribute('aria-label', 'Chat on WhatsApp');
+    whatsappBtn.innerHTML = '<i class="fab fa-whatsapp"></i>';
+    document.body.appendChild(whatsappBtn);
 });
