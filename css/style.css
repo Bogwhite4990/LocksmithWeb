@@ -211,19 +211,9 @@ header nav {
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
-.service-image {
-    max-width: 150px;
-    width: 100%;
-    height: auto;
-    border-radius: 5px;
-    margin-bottom: 1rem;
-}
-
-.content-image {
-    max-width: 300px;
-    width: 100%;
-    height: auto;
-    border-radius: 5px;
+.service-icon {
+    width: 60px;
+    height: 60px;
     margin-bottom: 1rem;
 }
 
