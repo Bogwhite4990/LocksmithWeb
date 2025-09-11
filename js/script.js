@@ -27,4 +27,41 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Testimonial Slider
+    const slider = document.querySelector('.testimonial-slider');
+    if (slider) {
+        const slides = document.querySelector('.testimonial-slides');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+        const slideCount = slides.children.length;
+        let slideIndex = 0;
+
+        function showSlides() {
+            const slideWidth = slides.children[0].getBoundingClientRect().width;
+            slides.style.transform = `translateX(-${slideIndex * slideWidth * 3}px)`;
+        }
+
+        function nextSlide() {
+            slideIndex++;
+            if (slideIndex >= Math.ceil(slideCount / 3)) {
+                slideIndex = 0;
+            }
+            showSlides();
+        }
+
+        function prevSlide() {
+            slideIndex--;
+            if (slideIndex < 0) {
+                slideIndex = Math.ceil(slideCount / 3) - 1;
+            }
+            showSlides();
+        }
+
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+
+        setInterval(nextSlide, 5000); // Autoplay every 5 seconds
+
+        window.addEventListener('resize', showSlides);
+    }
 });
