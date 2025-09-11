@@ -4,6 +4,18 @@ document.addEventListener('DOMContentLoaded', function() {
     // Mobile navigation toggle
     const navToggle = document.querySelector('.mobile-nav-toggle');
     const mobileNav = document.querySelector('.mobile-nav');
+    const header = document.querySelector('header');
+
+    function setMobileNavOffset() {
+        if (header && mobileNav) {
+            const headerHeight = header.offsetHeight;
+            mobileNav.style.top = headerHeight + 'px';
+            mobileNav.style.height = `calc(100vh - ${headerHeight}px)`;
+        }
+    }
+
+    setMobileNavOffset();
+    window.addEventListener('resize', setMobileNavOffset);
 
     if (navToggle && mobileNav) {
         navToggle.setAttribute('aria-expanded', 'false');
