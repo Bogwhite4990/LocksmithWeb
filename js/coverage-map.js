@@ -7,17 +7,24 @@ document.addEventListener('DOMContentLoaded', () => {
     attribution: '&copy; OpenStreetMap contributors'
   }).addTo(map);
 
+
   const dataUrl = new URL('../locations/areas.json', document.currentScript.src);
 
   fetch(dataUrl)
     .then(response => response.json())
     .then(data => {
       const bounds = L.latLngBounds();
+
+  fetch('locations/areas.json')
+    .then(response => response.json())
+    .then(data => {
+
       data.forEach(area => {
         if (typeof area.lat === 'number' && typeof area.lng === 'number') {
           L.marker([area.lat, area.lng])
             .addTo(map)
             .bindPopup(`<a href="${area.url}">${area.name}</a>`);
+
           bounds.extend([area.lat, area.lng]);
         }
       });
@@ -26,4 +33,10 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     })
     .catch(err => console.error('Failed to load service areas', err));
+
+        }
+      });
+    })
+    .catch(err => console.error('Failed to load locations', err));
+
 });
