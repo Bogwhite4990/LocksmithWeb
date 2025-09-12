@@ -1255,6 +1255,12 @@ footer h3 {
     background-color: #1ebe5d;
 }
 
+@media (max-width: 768px) {
+    .phone-bubble {
+        display: none;
+    }
+}
+
 @keyframes slide-in {
     from {
         transform: translateX(100%);
