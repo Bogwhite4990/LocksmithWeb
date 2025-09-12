@@ -245,13 +245,10 @@ function initSite() {
                     loadCaptcha();
                     return;
                 }
-                alert('Form submission is disabled in local preview.');
-                form.reset();
-                loadCaptcha();
-                return;
             }
             try {
-                const res = await fetch('/contact', {
+                const endpoint = location.protocol === 'file:' ? 'http://localhost:3000/contact' : '/contact';
+                const res = await fetch(endpoint, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(Object.fromEntries(formData.entries()))

@@ -647,6 +647,36 @@ header nav {
     outline: none;
 }
 
+.captcha-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.captcha-image {
+    height: 40px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.refresh-captcha {
+    background-color: var(--accent-color);
+    color: var(--secondary-color);
+    border: none;
+    border-radius: 5px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.refresh-captcha:hover {
+    background-color: #1a6b58;
+}
+
 .contact-form-container form {
     display: flex;
     flex-direction: column;
