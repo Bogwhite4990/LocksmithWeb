@@ -213,6 +213,14 @@ function initSite() {
 
         async function loadCaptcha() {
             try {
+                if (location.protocol === 'file:') {
+                    const text = Math.random().toString(36).substring(2, 8);
+                    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="40"><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="24" fill="#555">${text}</text></svg>`;
+                    captchaImg.src = `data:image/svg+xml;base64,${btoa(svg)}`;
+                    captchaImg.dataset.answer = text;
+                    captchaToken.value = 'local';
+                    return;
+                }
                 const res = await fetch('/captcha');
                 const data = await res.json();
                 captchaImg.src = data.image;
@@ -230,6 +238,18 @@ function initSite() {
         form.addEventListener('submit', async e => {
             e.preventDefault();
             const formData = new FormData(form);
+            if (location.protocol === 'file:') {
+                const answer = captchaImg.dataset.answer || '';
+                if (captchaInput.value.trim().toLowerCase() !== answer.toLowerCase()) {
+                    alert('Invalid captcha');
+                    loadCaptcha();
+                    return;
+                }
+                alert('Form submission is disabled in local preview.');
+                form.reset();
+                loadCaptcha();
+                return;
+            }
             try {
                 const res = await fetch('/contact', {
                     method: 'POST',
