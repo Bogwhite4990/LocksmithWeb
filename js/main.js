@@ -1,20 +1,4 @@
-const CONTACT_INFO = {
-    phone: '0123-456-7899',
-    email: 'contact@locksmith.com',
-    address: {
-        street: '123 Locking St',
-        city: 'London',
-        postalCode: 'E1 6AN',
-        country: 'UK',
-        full: '123 Locking St, London, UK'
-    },
-    social: {
-        facebook: 'https://www.facebook.com/your-locksmith',
-        instagram: 'https://www.instagram.com/your-locksmith'
-    }
-};
-
-function initSite() {
+function initSite(CONTACT_INFO) {
     // This script handles all the dynamic functionality for the website.
     const phoneDigits = CONTACT_INFO.phone.replace(/[^0-9]/g, '');
 
