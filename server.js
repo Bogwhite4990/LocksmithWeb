@@ -108,6 +108,14 @@ app.post(
   }
 );
 
+// 404 handler for unmatched GET requests
+app.use((req, res) => {
+  if (req.method === 'GET') {
+    return res.status(404).sendFile(path.join(__dirname, '404.html'));
+  }
+  res.status(404).send('Not Found');
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
