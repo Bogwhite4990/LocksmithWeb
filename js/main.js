@@ -200,6 +200,57 @@ function initSite() {
         updateCount();
     });
 
+    // Contact forms with captcha
+    document.querySelectorAll('form').forEach(form => {
+        const captchaImg = form.querySelector('.captcha-image');
+        const captchaToken = form.querySelector('input[name="captchaToken"]');
+        const captchaInput = form.querySelector('input[name="captchaValue"]');
+        const refreshBtn = form.querySelector('.refresh-captcha');
+
+        if (!captchaImg || !captchaToken || !captchaInput) {
+            return;
+        }
+
+        async function loadCaptcha() {
+            try {
+                const res = await fetch('/captcha');
+                const data = await res.json();
+                captchaImg.src = data.image;
+                captchaToken.value = data.token;
+            } catch (e) {
+                console.error('Captcha load failed', e);
+            }
+        }
+
+        if (refreshBtn) {
+            refreshBtn.addEventListener('click', loadCaptcha);
+        }
+        loadCaptcha();
+
+        form.addEventListener('submit', async e => {
+            e.preventDefault();
+            const formData = new FormData(form);
+            try {
+                const res = await fetch('/contact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(Object.fromEntries(formData.entries()))
+                });
+                const result = await res.json();
+                if (result.success) {
+                    form.reset();
+                    loadCaptcha();
+                    alert('Message sent successfully');
+                } else {
+                    alert(result.error || 'Submission failed');
+                    loadCaptcha();
+                }
+            } catch (err) {
+                alert('Network error');
+            }
+        });
+    });
+
     // Floating phone bubble and WhatsApp chat button
     const phoneBubble = document.createElement('div');
     phoneBubble.className = 'phone-bubble';

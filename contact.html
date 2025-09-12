@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us - 24/7 Local Locksmith</title>
     <meta name="description" content="Contact your local locksmith for 24/7 emergency service, quotes, or any inquiries. Call us, email us, or use our contact form.">
+    <meta name="robots" content="index, follow">
+    <meta name="keywords" content="locksmith contact, locksmith quote, emergency locksmith">
+    <meta name="author" content="Locksmith">
+    <link rel="canonical" href="https://www.example.com/contact.html">
+    <meta property="og:title" content="Contact Us - 24/7 Local Locksmith">
+    <meta property="og:description" content="Contact your local locksmith for 24/7 emergency service, quotes, or any inquiries.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.example.com/contact.html">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
@@ -74,6 +82,12 @@
                             <input type="email" name="email" placeholder="Your Email" required>
                             <input type="tel" name="phone" placeholder="Your Phone Number">
                             <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
+                            <div class="captcha-wrapper">
+                                <img class="captcha-image" alt="CAPTCHA">
+                                <button type="button" class="refresh-captcha" aria-label="Refresh captcha">&#8635;</button>
+                            </div>
+                            <input type="hidden" name="captchaToken">
+                            <input type="text" name="captchaValue" placeholder="Enter CAPTCHA" required>
                             <button type="submit" class="cta-button">Send Message</button>
                         </form>
                     </div>
