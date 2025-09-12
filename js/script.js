@@ -106,9 +106,19 @@ async function init() {
         loadComponent('footer-placeholder', 'footer.html', FOOTER_HTML)
     ]);
 
+    let contactInfo = {};
+    try {
+        const res = await fetch(new URL('config/contact.json', ROOT_URL));
+        if (res.ok) {
+            contactInfo = await res.json();
+        }
+    } catch (e) {
+        console.error('Failed to load contact info', e);
+    }
+
     const script = document.createElement('script');
     script.src = new URL('js/main.js', ROOT_URL).href;
-    script.onload = () => { if (typeof initSite === 'function') initSite(); };
+    script.onload = () => { if (typeof initSite === 'function') initSite(contactInfo); };
     document.body.appendChild(script);
 }
 
