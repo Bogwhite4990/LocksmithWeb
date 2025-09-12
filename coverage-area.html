@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="anonymous" />
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -93,6 +94,11 @@
                 <p>We proudly serve all of London and its surrounding areas. See our full list of locations below.</p>
             </div>
         </section>
+        <section class="coverage-map">
+            <div class="container">
+                <div id="coverage-map"></div>
+            </div>
+        </section>
 
         <section class="locations-list">
             <div class="container">
@@ -173,5 +179,7 @@
     </footer>
 
     <script src="js/script.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="anonymous"></script>
+    <script src="js/coverage-map.js"></script>
 </body>
 </html>
