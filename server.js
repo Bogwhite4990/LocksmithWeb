@@ -3,6 +3,7 @@ const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
 const nodemailer = require('nodemailer');
 const svgCaptcha = require('svg-captcha');
+const { check, validationResult } = require('express-validator');
 const fs = require('fs');
 const path = require('path');
 
@@ -67,33 +68,45 @@ app.get('/captcha', (req, res) => {
   res.json({ token, image: `data:image/svg+xml;base64,${Buffer.from(data).toString('base64')}` });
 });
 
-app.post('/contact', async (req, res) => {
-  const { name, email, phone, message, captchaToken, captchaValue } = req.body;
-  if (!verifyCaptcha(captchaToken, captchaValue)) {
-    return res.status(400).json({ success: false, error: 'Invalid captcha' });
+app.post(
+  '/contact',
+  [
+    check('name').trim().notEmpty().escape(),
+    check('email').trim().isEmail().normalizeEmail(),
+    check('message').trim().notEmpty().escape()
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ success: false, errors: errors.array() });
+    }
+    const { name, email, phone, message, captchaToken, captchaValue } = req.body;
+    if (!verifyCaptcha(captchaToken, captchaValue)) {
+      return res.status(400).json({ success: false, error: 'Invalid captcha' });
+    }
+    if (!emailConfig.host || !emailConfig.auth || !emailConfig.auth.user) {
+      return res.status(500).json({ success: false, error: 'Email server not configured' });
+    }
+    try {
+      const transporter = nodemailer.createTransport({
+        host: emailConfig.host,
+        port: emailConfig.port,
+        secure: emailConfig.secure,
+        auth: emailConfig.auth
+      });
+      await transporter.sendMail({
+        from: emailConfig.auth.user,
+        to: emailConfig.to || emailConfig.auth.user,
+        subject: `Website Contact from ${name}`,
+        text: `Name: ${name}\nEmail: ${email}\nPhone: ${phone || ''}\nMessage:\n${message}`
+      });
+      res.json({ success: true });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ success: false, error: 'Failed to send email' });
+    }
   }
-  if (!emailConfig.host || !emailConfig.auth || !emailConfig.auth.user) {
-    return res.status(500).json({ success: false, error: 'Email server not configured' });
-  }
-  try {
-    const transporter = nodemailer.createTransport({
-      host: emailConfig.host,
-      port: emailConfig.port,
-      secure: emailConfig.secure,
-      auth: emailConfig.auth
-    });
-    await transporter.sendMail({
-      from: emailConfig.auth.user,
-      to: emailConfig.to || emailConfig.auth.user,
-      subject: `Website Contact from ${name}`,
-      text: `Name: ${name}\nEmail: ${email}\nPhone: ${phone || ''}\nMessage:\n${message}`
-    });
-    res.json({ success: true });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ success: false, error: 'Failed to send email' });
-  }
-});
+);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
