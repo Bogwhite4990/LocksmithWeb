@@ -188,7 +188,7 @@ function initSite() {
     counters.forEach(counter => {
         const updateCount = () => {
             const target = +counter.getAttribute('data-target');
-            const count = +counter.innerText.replace(/,/g, '');
+            const count = parseInt(counter.innerText.replace(/\D/g, ''), 10) || 0;
             const increment = target / 200;
             if (count < target) {
                 counter.innerText = Math.ceil(count + increment).toLocaleString();
