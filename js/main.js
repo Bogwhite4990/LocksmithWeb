@@ -213,20 +213,23 @@ function initSite() {
 
         async function loadCaptcha() {
             try {
-                if (location.protocol === 'file:') {
-                    const text = Math.random().toString(36).substring(2, 8);
-                    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="40"><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="24" fill="#555">${text}</text></svg>`;
-                    captchaImg.src = `data:image/svg+xml;base64,${btoa(svg)}`;
-                    captchaImg.dataset.answer = text;
-                    captchaToken.value = 'local';
+                if (location.protocol !== 'file:') {
+                    const res = await fetch('/captcha');
+                    if (!res.ok) throw new Error('Network response was not ok');
+                    const data = await res.json();
+                    captchaImg.src = data.image;
+                    captchaToken.value = data.token;
+                    captchaImg.dataset.answer = '';
                     return;
                 }
-                const res = await fetch('/captcha');
-                const data = await res.json();
-                captchaImg.src = data.image;
-                captchaToken.value = data.token;
+                throw new Error('local');
             } catch (e) {
                 console.error('Captcha load failed', e);
+                const text = Math.random().toString(36).substring(2, 8);
+                const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="40"><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="24" fill="#555">${text}</text></svg>`;
+                captchaImg.src = `data:image/svg+xml;base64,${btoa(svg)}`;
+                captchaImg.dataset.answer = text;
+                captchaToken.value = 'local';
             }
         }
 
@@ -238,7 +241,7 @@ function initSite() {
         form.addEventListener('submit', async e => {
             e.preventDefault();
             const formData = new FormData(form);
-            if (location.protocol === 'file:') {
+            if (captchaToken.value === 'local') {
                 const answer = captchaImg.dataset.answer || '';
                 if (captchaInput.value.trim().toLowerCase() !== answer.toLowerCase()) {
                     alert('Invalid captcha');
