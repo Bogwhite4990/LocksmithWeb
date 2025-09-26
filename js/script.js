@@ -16,7 +16,7 @@ const NAVBAR_HTML = `<header>
             </ul>
         </nav>
         <div class="header-phone">
-            <a href="tel:">Call Us: </a>
+            <a href="tel:+447757666691">Call Us: +44 7757 666 691</a>
             <div class="header-social">
                 <a href="https://www.facebook.com/profile.php?id=61581353704416" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
                 <a href="https://www.instagram.com/lockersmithuk/" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
@@ -57,8 +57,8 @@ const FOOTER_HTML = `<footer>
             </div>
             <div class="footer-contact">
                 <h3>Contact Us</h3>
-                <p>Call Us: <a href="tel:"></a></p>
-                <p>Email: <a href="mailto:"></a></p>
+                <p>Call Us: <a href="tel:+447757666691">+44 7757 666 691</a></p>
+                <p>Email: <a href="mailto:contact@lockersmith.co.uk">contact@lockersmith.co.uk</a></p>
                 <div class="social-media">
                     <a href="https://www.facebook.com/profile.php?id=61581353704416" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
                     <a href="https://www.instagram.com/lockersmithuk/" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>

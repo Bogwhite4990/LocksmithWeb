@@ -1,3 +1,3 @@
 User-agent: *
 Disallow:
-Sitemap: https://www.example.com/sitemap.xml
+Sitemap: https://lockersmith.co.uk/sitemap.xml
