@@ -1,5 +1,10 @@
 const CONTACT_INFO = {
-    phone: '+44 7757 666 691',
+    phone: {
+        display: '07757 666 691',
+        local: '07757666691',
+        international: '+447757666691',
+        whatsapp: '447757666691'
+    },
     email: 'contact@lockersmith.co.uk',
     address: {
         street: '58 Stepney Way',
@@ -15,32 +20,65 @@ const CONTACT_INFO = {
     }
 };
 
-function escapeRegExp(str) {
-    return str.replace(/[\\^$.*+?()[\]{}|]/g, '\\$&');
-}
-
 function initSite() {
     // This script handles all the dynamic functionality for the website.
-    const phoneDigits = CONTACT_INFO.phone.replace(/[^0-9]/g, '');
-    const escapedPhone = escapeRegExp(CONTACT_INFO.phone);
-    const generalPhonePattern = /\+?\d[\d\s-]{6,}\d/g;
-    const duplicatePhonePattern = new RegExp(`(${escapedPhone})(?:\\s*[|,\/\\-]?\\s*${escapedPhone})+`, 'g');
+    const phoneFormats = CONTACT_INFO.phone;
+    const phoneLinks = new Set();
+    const localDialString = phoneFormats.local;
+    const internationalDialString = phoneFormats.international.replace(/\s+/g, '');
+    const displayPhone = phoneFormats.display;
+    const whatsappDialString = phoneFormats.whatsapp;
+    const phoneNumberPattern = /\+?\d[\d\s()-]{6,}\d/g;
+    let currentCountryCode = 'GB';
 
     function normalizePhoneText(text) {
         if (!text) {
-            return CONTACT_INFO.phone;
+            return displayPhone;
         }
 
-        let normalized = text.trim();
-        normalized = normalized.replace(generalPhonePattern, CONTACT_INFO.phone);
-        normalized = normalized.replace(duplicatePhonePattern, '$1');
-        normalized = normalized.replace(/\s{2,}/g, ' ').trim();
+        return text.replace(phoneNumberPattern, displayPhone);
+    }
 
-        if (!normalized.includes(CONTACT_INFO.phone)) {
-            normalized = `${normalized} ${CONTACT_INFO.phone}`.trim();
+    function registerPhoneLink(link) {
+        if (!link || phoneLinks.has(link)) {
+            return;
         }
 
-        return normalized;
+        link.classList.add('phone-link');
+        link.dataset.display = displayPhone;
+        link.dataset.local = localDialString;
+        link.dataset.int = internationalDialString;
+
+        const ariaLabel = link.getAttribute('aria-label');
+        if (ariaLabel) {
+            link.setAttribute('aria-label', normalizePhoneText(ariaLabel));
+        }
+
+        const phoneElement = link.querySelector('.phone-number-text');
+        if (phoneElement) {
+            phoneElement.textContent = displayPhone;
+        } else if (link.childElementCount === 0) {
+            const normalizedText = normalizePhoneText(link.textContent).trim();
+            link.textContent = normalizedText || displayPhone;
+        } else {
+            link.childNodes.forEach(node => {
+                if (node.nodeType === Node.TEXT_NODE) {
+                    node.textContent = normalizePhoneText(node.textContent);
+                }
+            });
+        }
+
+        phoneLinks.add(link);
+    }
+
+    function applyPhoneHrefByCountry(countryCode) {
+        currentCountryCode = (countryCode || 'GB').toUpperCase();
+        const hrefValue = currentCountryCode === 'GB' ? `tel:${localDialString}` : `tel:${internationalDialString}`;
+        phoneLinks.forEach(link => {
+            if (link instanceof HTMLAnchorElement) {
+                link.href = hrefValue;
+            }
+        });
     }
 
     // Mobile navigation toggle
@@ -49,17 +87,18 @@ function initSite() {
     const header = document.querySelector('header');
 
     // Update contact information across the page
-    document.querySelectorAll('a[href^="tel:"]').forEach(a => {
-        a.href = `tel:${phoneDigits}`;
+    document.querySelectorAll('a[href^="tel:"]').forEach(registerPhoneLink);
 
-        const phoneElement = a.querySelector('.phone-number-text');
-        if (phoneElement) {
-            phoneElement.textContent = CONTACT_INFO.phone;
-            return;
-        }
+    applyPhoneHrefByCountry('GB');
 
-        a.textContent = normalizePhoneText(a.textContent);
-    });
+    fetch('https://ipapi.co/json/')
+        .then(response => (response.ok ? response.json() : null))
+        .then(data => {
+            if (data && typeof data.country_code === 'string' && data.country_code.trim() !== '') {
+                applyPhoneHrefByCountry(data.country_code.trim());
+            }
+        })
+        .catch(() => {});
 
     document.querySelectorAll('a[href^="mailto:"]').forEach(a => {
         a.href = `mailto:${CONTACT_INFO.email}`;
@@ -89,7 +128,7 @@ function initSite() {
         try {
             const data = JSON.parse(tag.textContent);
             if (data['@type'] === 'Locksmith') {
-                data.telephone = CONTACT_INFO.phone;
+                data.telephone = internationalDialString;
                 data.address = data.address || {};
                 data.address.streetAddress = CONTACT_INFO.address.street;
                 data.address.addressLocality = CONTACT_INFO.address.city;
@@ -264,15 +303,20 @@ function initSite() {
     // Floating phone bubble and WhatsApp chat button
     const phoneBubble = document.createElement('div');
     phoneBubble.className = 'phone-bubble';
-    phoneBubble.innerHTML = `<a href="tel:${phoneDigits}">${CONTACT_INFO.phone}</a>`;
+    const phoneBubbleLink = document.createElement('a');
+    phoneBubbleLink.textContent = displayPhone;
+    registerPhoneLink(phoneBubbleLink);
+    phoneBubble.appendChild(phoneBubbleLink);
     document.body.appendChild(phoneBubble);
 
     const whatsappBtn = document.createElement('a');
     whatsappBtn.className = 'whatsapp-chat';
-    whatsappBtn.href = `https://wa.me/${phoneDigits}`;
+    whatsappBtn.href = `https://wa.me/${whatsappDialString}`;
     whatsappBtn.target = '_blank';
     whatsappBtn.rel = 'noopener';
     whatsappBtn.setAttribute('aria-label', 'Chat on WhatsApp');
     whatsappBtn.innerHTML = '<i class="fab fa-whatsapp"></i>';
     document.body.appendChild(whatsappBtn);
+
+    applyPhoneHrefByCountry(currentCountryCode);
 }
