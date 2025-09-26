@@ -15,9 +15,33 @@ const CONTACT_INFO = {
     }
 };
 
+function escapeRegExp(str) {
+    return str.replace(/[\\^$.*+?()[\]{}|]/g, '\\$&');
+}
+
 function initSite() {
     // This script handles all the dynamic functionality for the website.
     const phoneDigits = CONTACT_INFO.phone.replace(/[^0-9]/g, '');
+    const escapedPhone = escapeRegExp(CONTACT_INFO.phone);
+    const generalPhonePattern = /\+?\d[\d\s-]{6,}\d/g;
+    const duplicatePhonePattern = new RegExp(`(${escapedPhone})(?:\\s*[|,\/\\-]?\\s*${escapedPhone})+`, 'g');
+
+    function normalizePhoneText(text) {
+        if (!text) {
+            return CONTACT_INFO.phone;
+        }
+
+        let normalized = text.trim();
+        normalized = normalized.replace(generalPhonePattern, CONTACT_INFO.phone);
+        normalized = normalized.replace(duplicatePhonePattern, '$1');
+        normalized = normalized.replace(/\s{2,}/g, ' ').trim();
+
+        if (!normalized.includes(CONTACT_INFO.phone)) {
+            normalized = `${normalized} ${CONTACT_INFO.phone}`.trim();
+        }
+
+        return normalized;
+    }
 
     // Mobile navigation toggle
     const navToggle = document.querySelector('.mobile-nav-toggle');
@@ -34,13 +58,7 @@ function initSite() {
             return;
         }
 
-        if (/\d/.test(a.textContent)) {
-            a.textContent = a.textContent.replace(/[\+\d\-\s]+/, CONTACT_INFO.phone);
-        } else if (a.textContent.trim() !== '') {
-            a.textContent = `${a.textContent.trim()} ${CONTACT_INFO.phone}`.trim();
-        } else {
-            a.textContent = CONTACT_INFO.phone;
-        }
+        a.textContent = normalizePhoneText(a.textContent);
     });
 
     document.querySelectorAll('a[href^="mailto:"]').forEach(a => {
