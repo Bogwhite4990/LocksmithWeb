@@ -92,12 +92,16 @@ app.post(
         host: emailConfig.host,
         port: emailConfig.port,
         secure: emailConfig.secure,
-        auth: emailConfig.auth
+        auth: emailConfig.auth,
+        tls: {
+          rejectUnauthorized: true
+        }
       });
       await transporter.sendMail({
-        from: emailConfig.auth.user,
+        from: emailConfig.from || emailConfig.auth.user,
         to: emailConfig.to || emailConfig.auth.user,
         subject: `Website Contact from ${name}`,
+        replyTo: email,
         text: `Name: ${name}\nEmail: ${email}\nPhone: ${phone || ''}\nMessage:\n${message}`
       });
       res.json({ success: true });

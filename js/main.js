@@ -1,12 +1,13 @@
 const CONTACT_INFO = {
     phone: '+44 7757 666 691',
-    email: 'contact@locksmith.com',
+    email: 'contact@lockersmith.co.uk',
     address: {
-        street: '123 Locking St',
+        street: '58 Stepney Way',
         city: 'London',
-        postalCode: 'E1 6AN',
-        country: 'UK',
-        full: '123 Locking St, London, UK'
+        region: 'Tower Hamlets',
+        postalCode: 'E1 2EN',
+        country: 'United Kingdom',
+        full: '58 Stepney Way, Tower Hamlets, London, E1 2EN, United Kingdom'
     },
     social: {
         facebook: 'https://www.facebook.com/your-locksmith',
@@ -74,6 +75,9 @@ function initSite() {
                 data.address = data.address || {};
                 data.address.streetAddress = CONTACT_INFO.address.street;
                 data.address.addressLocality = CONTACT_INFO.address.city;
+                if (CONTACT_INFO.address.region) {
+                    data.address.addressRegion = CONTACT_INFO.address.region;
+                }
                 data.address.postalCode = CONTACT_INFO.address.postalCode;
                 data.address.addressCountry = CONTACT_INFO.address.country;
                 data.sameAs = [CONTACT_INFO.social.facebook, CONTACT_INFO.social.instagram];
