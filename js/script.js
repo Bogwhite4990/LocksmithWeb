@@ -18,8 +18,8 @@ const NAVBAR_HTML = `<header>
         <div class="header-phone">
             <a href="tel:">Call Us: </a>
             <div class="header-social">
-                <a><i class="fab fa-facebook-f"></i></a>
-                <a><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/profile.php?id=61581353704416" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/lockersmithuk/" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
             </div>
         </div>
         <button class="mobile-nav-toggle" aria-label="Open navigation">
@@ -60,8 +60,8 @@ const FOOTER_HTML = `<footer>
                 <p>Call Us: <a href="tel:"></a></p>
                 <p>Email: <a href="mailto:"></a></p>
                 <div class="social-media">
-                    <a><i class="fab fa-facebook-f"></i></a>
-                    <a><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/profile.php?id=61581353704416" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/lockersmithuk/" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
         </div>

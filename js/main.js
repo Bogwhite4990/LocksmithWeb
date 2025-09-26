@@ -10,8 +10,8 @@ const CONTACT_INFO = {
         full: '58 Stepney Way, Tower Hamlets, London, E1 2EN, United Kingdom'
     },
     social: {
-        facebook: 'https://www.facebook.com/your-locksmith',
-        instagram: 'https://www.instagram.com/your-locksmith'
+        facebook: 'https://www.facebook.com/profile.php?id=61581353704416',
+        instagram: 'https://www.instagram.com/lockersmithuk/'
     }
 };
 
