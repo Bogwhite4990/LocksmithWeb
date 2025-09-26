@@ -28,6 +28,8 @@ function initSite() {
     const internationalDialString = phoneFormats.international.replace(/\s+/g, '');
     const displayPhone = phoneFormats.display;
     const whatsappDialString = phoneFormats.whatsapp;
+    const whatsappMessage = 'Hello 👋, I need urgent help with a locksmith 🚪🔑. Can you assist me?';
+    const whatsappMessageEncoded = encodeURIComponent(whatsappMessage);
     const phoneNumberPattern = /\+?\d[\d\s()-]{6,}\d/g;
     let currentCountryCode = 'GB';
 
@@ -311,12 +313,28 @@ function initSite() {
 
     const whatsappBtn = document.createElement('a');
     whatsappBtn.className = 'whatsapp-chat';
-    whatsappBtn.href = `https://wa.me/${whatsappDialString}`;
+    whatsappBtn.href = `https://wa.me/${whatsappDialString}?text=${whatsappMessageEncoded}`;
     whatsappBtn.target = '_blank';
     whatsappBtn.rel = 'noopener';
     whatsappBtn.setAttribute('aria-label', 'Chat on WhatsApp');
     whatsappBtn.innerHTML = '<i class="fab fa-whatsapp"></i>';
     document.body.appendChild(whatsappBtn);
+
+    const whatsappLinkSelectors = ['a[href*="wa.me"]', 'a[href*="api.whatsapp.com"]'];
+    document.querySelectorAll(whatsappLinkSelectors.join(',')).forEach(link => {
+        link.href = `https://wa.me/${whatsappDialString}?text=${whatsappMessageEncoded}`;
+        const relTokens = new Set(
+            link.rel
+                .split(/\s+/)
+                .map(token => token.trim())
+                .filter(Boolean)
+        );
+        relTokens.add('noopener');
+        link.rel = Array.from(relTokens).join(' ');
+        if (!link.hasAttribute('target')) {
+            link.setAttribute('target', '_blank');
+        }
+    });
 
     applyPhoneHrefByCountry(currentCountryCode);
 }
