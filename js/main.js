@@ -204,74 +204,42 @@ function initSite() {
         updateCount();
     });
 
-    // Contact forms with captcha
-    document.querySelectorAll('form').forEach(form => {
-        const captchaImg = form.querySelector('.captcha-image');
-        const captchaToken = form.querySelector('input[name="captchaToken"]');
-        const captchaInput = form.querySelector('input[name="captchaValue"]');
-        const refreshBtn = form.querySelector('.refresh-captcha');
+    // Contact forms that use the visitor's email client
+    document.querySelectorAll('[data-mailto-form]').forEach(form => {
+        const recipient = form.dataset.mailto || CONTACT_INFO.email;
+        form.dataset.mailto = recipient;
 
-        if (!captchaImg || !captchaToken || !captchaInput) {
-            return;
-        }
-
-        async function loadCaptcha() {
-            try {
-                if (location.protocol !== 'file:') {
-                    const res = await fetch('/captcha');
-                    if (!res.ok) throw new Error('Network response was not ok');
-                    const data = await res.json();
-                    captchaImg.src = data.image;
-                    captchaToken.value = data.token;
-                    captchaImg.dataset.answer = '';
-                    return;
-                }
-                throw new Error('local');
-            } catch (e) {
-                console.error('Captcha load failed', e);
-                const text = Math.random().toString(36).substring(2, 8);
-                const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="40"><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="24" fill="#555">${text}</text></svg>`;
-                captchaImg.src = `data:image/svg+xml;base64,${btoa(svg)}`;
-                captchaImg.dataset.answer = text;
-                captchaToken.value = 'local';
-            }
-        }
-
-        if (refreshBtn) {
-            refreshBtn.addEventListener('click', loadCaptcha);
-        }
-        loadCaptcha();
-
-        form.addEventListener('submit', async e => {
-            e.preventDefault();
+        form.addEventListener('submit', event => {
+            event.preventDefault();
             const formData = new FormData(form);
-            if (captchaToken.value === 'local') {
-                const answer = captchaImg.dataset.answer || '';
-                if (captchaInput.value.trim().toLowerCase() !== answer.toLowerCase()) {
-                    alert('Invalid captcha');
-                    loadCaptcha();
-                    return;
-                }
+            const name = (formData.get('name') || '').trim();
+            const email = (formData.get('email') || '').trim();
+            const phone = (formData.get('phone') || '').trim();
+            const message = (formData.get('message') || '').trim();
+
+            if (!email) {
+                alert('Please add your email address so we can reply.');
+                return;
             }
-            try {
-                const endpoint = location.protocol === 'file:' ? 'http://localhost:3000/contact' : '/contact';
-                const res = await fetch(endpoint, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(Object.fromEntries(formData.entries()))
-                });
-                const result = await res.json();
-                if (result.success) {
-                    form.reset();
-                    loadCaptcha();
-                    alert('Message sent successfully');
-                } else {
-                    alert(result.error || 'Submission failed');
-                    loadCaptcha();
-                }
-            } catch (err) {
-                alert('Network error');
+
+            const subjectBase = form.dataset.mailtoSubject || 'New locksmith enquiry';
+            const subject = name ? `${subjectBase}: ${name}` : subjectBase;
+            const bodyLines = [
+                `Name: ${name || 'N/A'}`,
+                `Email: ${email}`
+            ];
+
+            if (phone) {
+                bodyLines.push(`Phone: ${phone}`);
             }
+
+            bodyLines.push('', 'Message:', message || 'N/A');
+
+            const mailtoLink = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join('\n'))}`;
+
+            window.location.href = mailtoLink;
+            alert('Your email app will open with the message ready to send.');
+            form.reset();
         });
     });
 
