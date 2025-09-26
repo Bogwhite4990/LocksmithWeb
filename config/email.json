@@ -1,10 +1,10 @@
 {
-  "host": "",
-  "port": 587,
-  "secure": false,
+  "host": "mail.lockersmith.co.uk",
+  "port": 465,
+  "secure": true,
   "auth": {
-    "user": "",
-    "pass": ""
+    "user": "contact@lockersmith.co.uk",
+    "pass": "Romania143!"
   },
-  "to": ""
+  "to": "contact@lockersmith.co.uk"
 }
