@@ -210,15 +210,31 @@ function initSite() {
         const captchaToken = form.querySelector('input[name="captchaToken"]');
         const captchaInput = form.querySelector('input[name="captchaValue"]');
         const refreshBtn = form.querySelector('.refresh-captcha');
+        const statusMessage = form.querySelector('.form-status');
+        const backendMode = (form.dataset.backend || 'auto').toLowerCase();
+        const backendEnabled = !['static', 'disabled', 'none', 'offline'].includes(backendMode);
+        const usingRemoteEndpoints = backendEnabled && location.protocol !== 'file:';
 
         if (!captchaImg || !captchaToken || !captchaInput) {
             return;
         }
 
+        const showStatus = (message, type = 'info') => {
+            if (!statusMessage) {
+                if (type === 'error') {
+                    alert(message);
+                }
+                return;
+            }
+            statusMessage.textContent = message;
+            statusMessage.classList.remove('error', 'success', 'info');
+            statusMessage.classList.add(type);
+        };
+
         async function loadCaptcha() {
             try {
-                if (location.protocol !== 'file:') {
-                    const res = await fetch('/captcha');
+                if (usingRemoteEndpoints) {
+                    const res = await fetch('/captcha', { credentials: 'same-origin' });
                     if (!res.ok) throw new Error('Network response was not ok');
                     const data = await res.json();
                     captchaImg.src = data.image;
@@ -228,12 +244,20 @@ function initSite() {
                 }
                 throw new Error('local');
             } catch (e) {
-                console.error('Captcha load failed', e);
+                if (usingRemoteEndpoints) {
+                    console.error('Captcha load failed', e);
+                }
                 const text = Math.random().toString(36).substring(2, 8);
                 const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="40"><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="24" fill="#555">${text}</text></svg>`;
                 captchaImg.src = `data:image/svg+xml;base64,${btoa(svg)}`;
                 captchaImg.dataset.answer = text;
                 captchaToken.value = 'local';
+                if (statusMessage) {
+                    const message = usingRemoteEndpoints
+                        ? 'Offline CAPTCHA loaded. Please enter the characters shown above.'
+                        : 'Static CAPTCHA loaded. Please enter the characters shown above.';
+                    showStatus(message, 'info');
+                }
             }
         }
 
@@ -248,30 +272,64 @@ function initSite() {
             if (captchaToken.value === 'local') {
                 const answer = captchaImg.dataset.answer || '';
                 if (captchaInput.value.trim().toLowerCase() !== answer.toLowerCase()) {
-                    alert('Invalid captcha');
-                    loadCaptcha();
+                    await loadCaptcha();
+                    showStatus('Invalid CAPTCHA. Please try again.', 'error');
                     return;
                 }
             }
-            try {
-                const endpoint = location.protocol === 'file:' ? 'http://localhost:3000/contact' : '/contact';
-                const res = await fetch(endpoint, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(Object.fromEntries(formData.entries()))
-                });
-                const result = await res.json();
-                if (result.success) {
-                    form.reset();
-                    loadCaptcha();
-                    alert('Message sent successfully');
-                } else {
-                    alert(result.error || 'Submission failed');
-                    loadCaptcha();
+            if (usingRemoteEndpoints) {
+                try {
+                    const endpoint = location.protocol === 'file:' ? 'http://localhost:3000/contact' : '/contact';
+                    const res = await fetch(endpoint, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(Object.fromEntries(formData.entries()))
+                    });
+                    if (!res.ok) {
+                        throw new Error('HTTP ' + res.status);
+                    }
+                    const result = await res.json();
+                    if (result.success) {
+                        form.reset();
+                        await loadCaptcha();
+                        showStatus('Message sent successfully.', 'success');
+                        return;
+                    }
+                    throw new Error(result.error || 'Submission failed');
+                } catch (err) {
+                    console.warn('Falling back to mailto submission', err);
                 }
-            } catch (err) {
-                alert('Network error');
             }
+
+            let name = (formData.get('name') || '').trim();
+            const email = (formData.get('email') || '').trim();
+            const phone = (formData.get('phone') || '').trim();
+            const message = (formData.get('message') || '').trim();
+
+            if (!name) {
+                name = 'Website visitor';
+            }
+
+            const lines = [`Name: ${name}`];
+            if (email) lines.push(`Email: ${email}`);
+            if (phone) lines.push(`Phone: ${phone}`);
+            lines.push('');
+            lines.push('Message:');
+            lines.push(message || '');
+
+            const mailto = new URLSearchParams({
+                subject: `Website enquiry from ${name}`,
+                body: lines.join('\n')
+            });
+            const mailtoLink = `mailto:${CONTACT_INFO.email}?${mailto.toString().replace(/\+/g, '%20')}`;
+            await loadCaptcha();
+            const statusText = usingRemoteEndpoints
+                ? 'We could not reach the message service. Please send your message using your email app.'
+                : 'Please send your message using your email app. The form will open your default email program.';
+            showStatus(statusText, 'error');
+            setTimeout(() => {
+                window.location.href = mailtoLink;
+            }, 150);
         });
     });
 

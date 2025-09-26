@@ -523,7 +523,7 @@
                 <h2>Contact Us</h2>
                 <div class="contact-flex">
                     <div class="contact-form">
-                        <form action="/contact" method="post">
+                        <form action="/contact" method="post" data-backend="static">
                             <input type="text" name="name" placeholder="Your Name" required>
                             <input type="email" name="email" placeholder="Your Email" required>
                             <textarea name="message" placeholder="Your Message" required></textarea>
@@ -533,6 +533,7 @@
                             </div>
                             <input type="hidden" name="captchaToken">
                             <input type="text" name="captchaValue" placeholder="Enter CAPTCHA" required>
+                            <p class="form-status" role="status" aria-live="polite"></p>
                             <button type="submit" class="cta-button">Send Message</button>
                         </form>
                     </div>

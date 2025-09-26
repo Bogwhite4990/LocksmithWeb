@@ -684,6 +684,24 @@ header nav {
     background-color: #1a6b58;
 }
 
+.form-status {
+    font-size: 0.95rem;
+    min-height: 1.2em;
+    color: #1f2933;
+}
+
+.form-status.success {
+    color: #1a6b58;
+}
+
+.form-status.error {
+    color: #b91c1c;
+}
+
+.form-status.info {
+    color: #1f2933;
+}
+
 .contact-form-container form {
     display: flex;
     flex-direction: column;
