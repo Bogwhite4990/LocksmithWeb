@@ -28,7 +28,7 @@ function initSite() {
     const internationalDialString = phoneFormats.international.replace(/\s+/g, '');
     const displayPhone = phoneFormats.display;
     const whatsappDialString = phoneFormats.whatsapp;
-    const whatsappMessage = 'Hello 👋, I need urgent help with a locksmith 🚪🔑. Can you assist me?';
+    const whatsappMessage = 'Hello, I need urgent help with a locksmith. Can you assist me?';
     const whatsappMessageEncoded = encodeURIComponent(whatsappMessage);
     const phoneNumberPattern = /\+?\d[\d\s()-]{6,}\d/g;
     let currentCountryCode = 'GB';
