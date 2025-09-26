@@ -35,7 +35,7 @@ function initSite() {
         }
 
         if (/\d/.test(a.textContent)) {
-            a.textContent = a.textContent.replace(/[\d\-\s]+/, CONTACT_INFO.phone);
+            a.textContent = a.textContent.replace(/[\+\d\-\s]+/, CONTACT_INFO.phone);
         } else if (a.textContent.trim() !== '') {
             a.textContent = `${a.textContent.trim()} ${CONTACT_INFO.phone}`.trim();
         } else {
