@@ -210,10 +210,23 @@ function initSite() {
         const captchaToken = form.querySelector('input[name="captchaToken"]');
         const captchaInput = form.querySelector('input[name="captchaValue"]');
         const refreshBtn = form.querySelector('.refresh-captcha');
+        const statusMessage = form.querySelector('.form-status');
 
         if (!captchaImg || !captchaToken || !captchaInput) {
             return;
         }
+
+        const showStatus = (message, type = 'info') => {
+            if (!statusMessage) {
+                if (type === 'error') {
+                    alert(message);
+                }
+                return;
+            }
+            statusMessage.textContent = message;
+            statusMessage.classList.remove('error', 'success', 'info');
+            statusMessage.classList.add(type);
+        };
 
         async function loadCaptcha() {
             try {
@@ -234,6 +247,9 @@ function initSite() {
                 captchaImg.src = `data:image/svg+xml;base64,${btoa(svg)}`;
                 captchaImg.dataset.answer = text;
                 captchaToken.value = 'local';
+                if (statusMessage) {
+                    showStatus('Offline CAPTCHA loaded. Please enter the characters shown above.', 'info');
+                }
             }
         }
 
@@ -248,8 +264,8 @@ function initSite() {
             if (captchaToken.value === 'local') {
                 const answer = captchaImg.dataset.answer || '';
                 if (captchaInput.value.trim().toLowerCase() !== answer.toLowerCase()) {
-                    alert('Invalid captcha');
-                    loadCaptcha();
+                    await loadCaptcha();
+                    showStatus('Invalid CAPTCHA. Please try again.', 'error');
                     return;
                 }
             }
@@ -260,17 +276,45 @@ function initSite() {
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(Object.fromEntries(formData.entries()))
                 });
+                if (!res.ok) {
+                    throw new Error('HTTP ' + res.status);
+                }
                 const result = await res.json();
                 if (result.success) {
                     form.reset();
-                    loadCaptcha();
-                    alert('Message sent successfully');
-                } else {
-                    alert(result.error || 'Submission failed');
-                    loadCaptcha();
+                    await loadCaptcha();
+                    showStatus('Message sent successfully.', 'success');
+                    return;
                 }
+                throw new Error(result.error || 'Submission failed');
             } catch (err) {
-                alert('Network error');
+                console.warn('Falling back to mailto submission', err);
+                let name = (formData.get('name') || '').trim();
+                const email = (formData.get('email') || '').trim();
+                const phone = (formData.get('phone') || '').trim();
+                const message = (formData.get('message') || '').trim();
+
+                if (!name) {
+                    name = 'Website visitor';
+                }
+
+                const lines = [`Name: ${name}`];
+                if (email) lines.push(`Email: ${email}`);
+                if (phone) lines.push(`Phone: ${phone}`);
+                lines.push('');
+                lines.push('Message:');
+                lines.push(message || '');
+
+                const mailto = new URLSearchParams({
+                    subject: `Website enquiry from ${name}`,
+                    body: lines.join('\n')
+                });
+                const mailtoLink = `mailto:${CONTACT_INFO.email}?${mailto.toString().replace(/\+/g, '%20')}`;
+                await loadCaptcha();
+                showStatus('We could not reach the message service. Please send your message using your email app.', 'error');
+                setTimeout(() => {
+                    window.location.href = mailtoLink;
+                }, 150);
             }
         });
     });
