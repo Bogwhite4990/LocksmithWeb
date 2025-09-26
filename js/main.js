@@ -211,9 +211,11 @@ function initSite() {
         const captchaInput = form.querySelector('input[name="captchaValue"]');
         const refreshBtn = form.querySelector('.refresh-captcha');
         const statusMessage = form.querySelector('.form-status');
+
         const backendMode = (form.dataset.backend || 'auto').toLowerCase();
         const backendEnabled = !['static', 'disabled', 'none', 'offline'].includes(backendMode);
         const usingRemoteEndpoints = backendEnabled && location.protocol !== 'file:';
+
 
         if (!captchaImg || !captchaToken || !captchaInput) {
             return;
@@ -253,10 +255,14 @@ function initSite() {
                 captchaImg.dataset.answer = text;
                 captchaToken.value = 'local';
                 if (statusMessage) {
+
                     const message = usingRemoteEndpoints
                         ? 'Offline CAPTCHA loaded. Please enter the characters shown above.'
                         : 'Static CAPTCHA loaded. Please enter the characters shown above.';
                     showStatus(message, 'info');
+
+                    showStatus('Offline CAPTCHA loaded. Please enter the characters shown above.', 'info');
+
                 }
             }
         }
@@ -277,6 +283,7 @@ function initSite() {
                     return;
                 }
             }
+
             if (usingRemoteEndpoints) {
                 try {
                     const endpoint = location.protocol === 'file:' ? 'http://localhost:3000/contact' : '/contact';
@@ -299,6 +306,54 @@ function initSite() {
                 } catch (err) {
                     console.warn('Falling back to mailto submission', err);
                 }
+
+            try {
+                const endpoint = location.protocol === 'file:' ? 'http://localhost:3000/contact' : '/contact';
+                const res = await fetch(endpoint, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(Object.fromEntries(formData.entries()))
+                });
+                if (!res.ok) {
+                    throw new Error('HTTP ' + res.status);
+                }
+                const result = await res.json();
+                if (result.success) {
+                    form.reset();
+                    await loadCaptcha();
+                    showStatus('Message sent successfully.', 'success');
+                    return;
+                }
+                throw new Error(result.error || 'Submission failed');
+            } catch (err) {
+                console.warn('Falling back to mailto submission', err);
+                let name = (formData.get('name') || '').trim();
+                const email = (formData.get('email') || '').trim();
+                const phone = (formData.get('phone') || '').trim();
+                const message = (formData.get('message') || '').trim();
+
+                if (!name) {
+                    name = 'Website visitor';
+                }
+
+                const lines = [`Name: ${name}`];
+                if (email) lines.push(`Email: ${email}`);
+                if (phone) lines.push(`Phone: ${phone}`);
+                lines.push('');
+                lines.push('Message:');
+                lines.push(message || '');
+
+                const mailto = new URLSearchParams({
+                    subject: `Website enquiry from ${name}`,
+                    body: lines.join('\n')
+                });
+                const mailtoLink = `mailto:${CONTACT_INFO.email}?${mailto.toString().replace(/\+/g, '%20')}`;
+                await loadCaptcha();
+                showStatus('We could not reach the message service. Please send your message using your email app.', 'error');
+                setTimeout(() => {
+                    window.location.href = mailtoLink;
+                }, 150);
+
             }
 
             let name = (formData.get('name') || '').trim();
