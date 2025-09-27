@@ -36,14 +36,22 @@ app.use((req, res, next) => {
 });
 
 app.use((req, res, next) => {
-  const ext = path.extname(req.path || '');
+  const ext = path.extname(req.path || '').toLowerCase();
   if (!ext || ext === '.html') {
-    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+    res.setHeader('Content-Type', 'text/html; charset=UTF-8');
   }
   next();
 });
 
-app.use(express.static(__dirname));
+app.use(
+  express.static(__dirname, {
+    setHeaders: (res, filePath) => {
+      if (path.extname(filePath).toLowerCase() === '.html') {
+        res.setHeader('Content-Type', 'text/html; charset=UTF-8');
+      }
+    }
+  })
+);
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');

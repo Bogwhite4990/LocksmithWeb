@@ -49,6 +49,50 @@ h1, h2, h3 {
     color: var(--primary-color);
 }
 
+.section-subtitle,
+.feature-title,
+.service-title,
+.signal-title,
+.coverage-highlight,
+.location-name {
+    font-family: var(--heading-font);
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.section-subtitle {
+    font-size: 1.25rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.feature-title {
+    font-size: 1.1rem;
+    margin: 0.75rem 0 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.service-title {
+    font-size: 1.2rem;
+    margin: 1rem 0 0.75rem;
+}
+
+.signal-title {
+    font-size: 1.1rem;
+    margin: 0.75rem 0;
+}
+
+.coverage-highlight {
+    font-size: 1.1rem;
+    margin: 1rem 0 0.75rem;
+}
+
+.location-name {
+    font-size: 1.1rem;
+    margin: 0.75rem 0 0;
+}
+
 a {
     text-decoration: none;
     color: var(--accent-color);
