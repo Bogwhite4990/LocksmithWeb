@@ -9,10 +9,40 @@ const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const CANONICAL_HOST = 'www.lockersmith.co.uk';
+const PRIMARY_DOMAIN = 'lockersmith.co.uk';
+const LOCAL_HOSTS = new Set(['localhost', '127.0.0.1']);
+
+app.enable('trust proxy');
 
 app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+app.use((req, res, next) => {
+  const hostHeader = req.headers.host;
+  if (!hostHeader) return next();
+  const [hostname] = hostHeader.split(':');
+  if (LOCAL_HOSTS.has(hostname) || hostname.endsWith('.localhost')) {
+    return next();
+  }
+  if (hostname === PRIMARY_DOMAIN) {
+    return res.redirect(301, `https://${CANONICAL_HOST}${req.originalUrl}`);
+  }
+  if (hostname === CANONICAL_HOST && !req.secure) {
+    return res.redirect(301, `https://${CANONICAL_HOST}${req.originalUrl}`);
+  }
+  return next();
+});
+
+app.use((req, res, next) => {
+  const ext = path.extname(req.path || '');
+  if (!ext || ext === '.html') {
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+  }
+  next();
+});
+
 app.use(express.static(__dirname));
 
 app.use((req, res, next) => {
