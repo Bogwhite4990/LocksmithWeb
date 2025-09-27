@@ -21,49 +21,47 @@ COMMON_KEYWORDS = [
     "lock replacement",
     "smart lock installation",
     "24 hour locksmith",
-    "2025 locksmith services"
+    "24/7 locksmith services"
 ]
 
 SPECIAL_TITLES = {
-    "index.html": "Locker Smith Locksmiths London | 24/7 Emergency Experts 2025",
-    "contact.html": "Contact Locker Smith | London Locksmith Support 24/7",
+    "index.html": "Locker Smith Locksmiths London | 24/7 Emergency Help",
+    "contact.html": "Contact Locker Smith | 24/7 London Locksmith Support",
     "coverage.html": "Service Coverage | Locker Smith Locksmiths Across London",
-    "coverage-area.html": "Coverage Areas | Locker Smith Mobile Locksmith Team",
-    "services.html": "Locksmith Services | Locker Smith Security Solutions 2025",
+    "coverage-area.html": "Coverage Areas | Locker Smith Mobile Locksmiths",
+    "services.html": "Locksmith Services | Locker Smith Security Solutions",
     "privacy-policy.html": "Privacy Policy | Locker Smith Locksmiths London",
     "404.html": "404 - Locker Smith Locksmiths London"
 }
 
 SPECIAL_DESCRIPTIONS = {
     "index.html": (
-        "Locker Smith delivers trusted 24/7 locksmith services across Greater London, "
-        "helping residents, drivers and businesses gain fast, damage-free access and "
-        "upgrade their security for 2025. Call our DBS-checked experts any time."
+        "Locker Smith delivers 24/7 locksmith support across Greater London for homes, "
+        "vehicles and businesses. Call our DBS-checked specialists any time."
     ),
     "contact.html": (
         "Contact Locker Smith for emergency call-outs, quotes and expert locksmith "
-        "advice across Greater London. Our support desk is available 24/7 by phone, "
-        "email or callback request."
+        "advice across Greater London by phone, email or callback 24/7."
     ),
     "coverage.html": (
-        "Explore Locker Smith's London locksmith coverage. We reach every borough in "
-        "30 minutes with emergency unlocking, lock repairs and security upgrades."
+        "Explore Locker Smith's London coverage with emergency unlocking, lock repairs "
+        "and security upgrades reaching most boroughs in about 30 minutes."
     ),
     "coverage-area.html": (
-        "Discover the Locker Smith service area across London and the Home Counties. "
-        "Our 24/7 locksmiths attend homes, cars and businesses with rapid response."
+        "Discover Locker Smith's service area across London and the Home Counties with "
+        "24/7 mobile locksmiths for homes, vehicles and businesses."
     ),
     "services.html": (
-        "Browse Locker Smith's full range of locksmith services for 2025, including "
-        "emergency entry, lock replacements, car unlocking and smart security."
+        "Browse Locker Smith's emergency entry, lock replacement, car unlocking and "
+        "smart security services available across London day and night."
     ),
     "privacy-policy.html": (
-        "Read Locker Smith's privacy policy to understand how we protect customer "
-        "data across our London locksmith services."
+        "Read Locker Smith's privacy policy to learn how we protect customer data and "
+        "communications across our London locksmith services."
     ),
     "404.html": (
-        "The page you are looking for cannot be found. Discover Locker Smith's 24/7 "
-        "locksmith services for London homes, cars and businesses."
+        "The page you requested cannot be found. Explore Locker Smith's 24/7 London "
+        "locksmith services for homes, cars and businesses."
     )
 }
 
@@ -92,6 +90,10 @@ def css_href_for(path: Path) -> str:
     return "css/style.css" if path.parent == ROOT else "../css/style.css"
 
 
+def asset_href_for(path: Path, asset: str) -> str:
+    return f"images/{asset}" if path.parent == ROOT else f"../images/{asset}"
+
+
 def determine_title(path: Path, h1_text: str | None) -> str:
     rel = path.relative_to(ROOT)
     rel_name = rel.name
@@ -99,13 +101,13 @@ def determine_title(path: Path, h1_text: str | None) -> str:
         return SPECIAL_TITLES[rel_name]
     if rel.parts and rel.parts[0] == 'services':
         service_name = h1_text or slug_to_title(path.stem)
-        return f"{service_name} in London | Locker Smith Locksmiths 2025"
+        return f"{service_name} in London | Locker Smith Locksmiths"
     if rel.parts and rel.parts[0] == 'locations':
         area_title = slug_to_title(path.stem)
-        return f"Locksmiths in {area_title} | Locker Smith Local Experts 2025"
+        return f"Locksmiths in {area_title} | Locker Smith"
     if h1_text:
-        return f"{h1_text} | Locker Smith Locksmiths London 2025"
-    return f"{SITE_NAME} Locksmiths London 2025"
+        return f"{h1_text} | Locker Smith Locksmiths London"
+    return f"{SITE_NAME} Locksmiths London | 24/7 Help"
 
 
 def determine_description(path: Path, h1_text: str | None) -> str:
@@ -117,22 +119,21 @@ def determine_description(path: Path, h1_text: str | None) -> str:
         service_name = h1_text or slug_to_title(path.stem)
         lowered = service_name.lower()
         return (
-            f"Locker Smith's {lowered} service keeps London properties secure in 2025 "
-            f"with rapid response specialists, British Standard hardware and smart "
-            f"security upgrades available around the clock."
+            f"Locker Smith's {lowered} service secures London properties with rapid "
+            f"specialists, British Standard hardware and 24/7 smart upgrades."
         )
     if rel.parts and rel.parts[0] == 'locations':
         area_title = slug_to_title(path.stem)
         return (
-            f"Locker Smith provides 24/7 locksmiths in {area_title}, offering "
-            f"emergency entry, lock repairs, security upgrades and car unlocking "
-            f"with average arrival times of 30 minutes across the area."
+            f"Locker Smith provides 24/7 locksmiths in {area_title} for emergency entry, "
+            f"lock repairs, security upgrades and car unlocking, targeting 30-minute "
+            f"arrivals."
         )
     if h1_text:
         lowered = h1_text.lower()
         return (
             f"Locker Smith offers {lowered} backed by DBS-checked locksmiths, "
-            f"rapid response vans and 2025-ready security technology across Greater London."
+            f"rapid-response vans and modern security technology across Greater London."
         )
     return SPECIAL_DESCRIPTIONS.get('index.html')
 
@@ -377,7 +378,9 @@ def build_head(path: Path, original_head: str, h1_text: str | None) -> str:
     structured_data = graph_for(path, title, description, h1_text, canonical)
     structured_json = json.dumps(structured_data, indent=2)
 
-    base_tag = '\n    <base href="./">' if path.name == 'index.html' else ''
+    base_tag = f"\n    <base href=\"{BASE_URL}\">" if path.name == 'index.html' else ''
+    icon_href = asset_href_for(path, 'icon.ico')
+    apple_icon_href = asset_href_for(path, 'website-logo.png')
 
     head_lines = f"""
     <meta charset=\"UTF-8\">
@@ -389,6 +392,8 @@ def build_head(path: Path, original_head: str, h1_text: str | None) -> str:
     <meta name=\"author\" content=\"{SITE_NAME}\">
     <meta name=\"keywords\" content=\"{keywords}\">
     <link rel=\"canonical\" href=\"{canonical}\">
+    <link rel=\"icon\" type=\"image/x-icon\" href=\"{icon_href}\">
+    <link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"{apple_icon_href}\">
     <meta property=\"og:title\" content=\"{title}\">
     <meta property=\"og:description\" content=\"{description}\">
     <meta property=\"og:type\" content=\"{og_type}\">
