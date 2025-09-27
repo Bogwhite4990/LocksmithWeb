@@ -1,8 +1,8 @@
 const CONTACT_INFO = {
     phone: {
-        display: '07757 666 691',
-        local: '07757666691',
-        international: '+447757666691',
+        display: '02039513549',
+        local: '02039513549',
+        international: '+44 20 3951 3549',
         whatsapp: '447757666691'
     },
     email: 'contact@lockersmith.co.uk',
