@@ -5,9 +5,10 @@ from pathlib import Path
 ROOT = Path('.').resolve()
 BASE_URL = "https://lockersmith.co.uk/"
 SITE_NAME = "Locker Smith"
-PHONE_DISPLAY = "07757 666 691"
-PHONE_LOCAL = "07757666691"
-PHONE_INT = "+447757666691"
+PHONE_DISPLAY = "02039513549"
+PHONE_LOCAL = "02039513549"
+PHONE_INT = "+44 20 3951 3549"
+PHONE_INT_CANONICAL = re.sub(r'[^+\d]', '', PHONE_INT)
 PHONE_TEL = PHONE_LOCAL
 DEFAULT_IMAGE = f"{BASE_URL}images/locksmith-fixing-a-door.jpg"
 DEFAULT_TWITTER_IMAGE = f"{BASE_URL}images/locksmiths-for-cars.jpg"
@@ -412,21 +413,22 @@ def build_head(path: Path, original_head: str, h1_text: str | None) -> str:
 
 def update_telephone_references(text: str) -> str:
     text = text.replace('href="tel:"', f'href="tel:{PHONE_TEL}"')
-    text = text.replace('href="tel:+44 7757 666 691"', f'href="tel:{PHONE_TEL}"')
-    text = text.replace('href="tel:+447757666691"', f'href="tel:{PHONE_TEL}"')
-    text = text.replace('href="tel:07757666691"', f'href="tel:{PHONE_TEL}"')
+    phone_patterns = (PHONE_INT, PHONE_INT_CANONICAL, PHONE_TEL)
+    for pattern in phone_patterns:
+        text = text.replace(f'href="tel:{pattern}"', f'href="tel:{PHONE_TEL}"')
     text = re.sub(r'Call Now:\s*</a>', f'Call Now: {PHONE_DISPLAY}</a>', text)
     text = re.sub(r'Call Now:\s*</strong>', f'Call Now: {PHONE_DISPLAY}</strong>', text)
     text = re.sub(r'<a href="tel:"></a>', f'<a href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a>', text)
-    text = re.sub(r'<a href="tel:(?:\+447757666691|07757666691)">.*?</a>', f'<a href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a>', text)
+    tel_pattern = '|'.join(re.escape(p) for p in phone_patterns)
+    text = re.sub(rf'<a href="tel:(?:{tel_pattern})">.*?</a>', f'<a href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a>', text)
     text = re.sub(r'<a href="tel:\">(.*?)</a>', f'<a href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a>', text)
     text = text.replace('Call Us: <a href="tel:">', f'Call Us: <a href="tel:{PHONE_TEL}">')
     text = re.sub(r'Call Us: <a href="tel:[^"]*">\s*</a>', f'Call Us: <a href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a>', text)
     text = re.sub(r'Call Us: <a href="tel:{PHONE_TEL}">\s*</a>', f'Call Us: <a href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a>', text)
     text = re.sub(r'Call Us:\s*<a href="tel:{PHONE_TEL}">([^<]*)</a>', lambda m: f'Call Us: <a href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a>', text)
     text = re.sub(r'<a href="tel:{PHONE_TEL}">\s*</a>', f'<a href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a>', text)
-    text = text.replace('tel:+447757666691', f'tel:{PHONE_TEL}')
-    text = text.replace('tel:07757666691', f'tel:{PHONE_TEL}')
+    for pattern in phone_patterns:
+        text = text.replace(f'tel:{pattern}', f'tel:{PHONE_TEL}')
     return text
 
 
