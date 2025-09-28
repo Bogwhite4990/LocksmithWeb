@@ -1,4 +1,36 @@
 const ROOT_URL = new URL('..', document.currentScript.src);
+const GOOGLE_ADS_CONVERSION_ID = 'AW-17608473030';
+
+(function initGoogleAdsGlobalSiteTag() {
+    if (typeof document === 'undefined') {
+        return;
+    }
+
+    if (!document.querySelector(`script[src*="${GOOGLE_ADS_CONVERSION_ID}"]`)) {
+        const head = document.head || document.querySelector('head') || document.documentElement;
+        const gtagScript = document.createElement('script');
+        gtagScript.async = true;
+        gtagScript.src = `https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ADS_CONVERSION_ID}`;
+        head.appendChild(gtagScript);
+    }
+
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = window.gtag || function gtag() {
+        window.dataLayer.push(arguments);
+    };
+
+    window.gtag('js', new Date());
+    window.gtag('config', GOOGLE_ADS_CONVERSION_ID);
+})();
+
+if (!window.GOOGLE_ADS_CONFIG) {
+    // TODO: Replace the conversion label placeholders with the actual values from Google Ads.
+    window.GOOGLE_ADS_CONFIG = {
+        conversionId: GOOGLE_ADS_CONVERSION_ID,
+        phoneConversionLabel: 'AW-17608473030/LABEL_PHONE',
+        whatsappConversionLabel: 'AW-17608473030/LABEL_WHATSAPP'
+    };
+}
 
 const NAVBAR_HTML = `<header>
     <div class="container">
