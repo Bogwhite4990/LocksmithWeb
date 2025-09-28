@@ -22,6 +22,17 @@ const CONTACT_INFO = {
 
 function initSite() {
     // This script handles all the dynamic functionality for the website.
+    const googleAdsConfig = window.GOOGLE_ADS_CONFIG || {
+        conversionId: 'AW-17608473030',
+        phoneConversionLabel: 'AW-17608473030/LABEL_PHONE',
+        whatsappConversionLabel: 'AW-17608473030/LABEL_WHATSAPP'
+    };
+    const phoneConversionAttribute = googleAdsConfig.phoneConversionLabel
+        ? `if(window.gtag){gtag('event','conversion',{'send_to':'${googleAdsConfig.phoneConversionLabel}'});}`
+        : '';
+    const whatsappConversionAttribute = googleAdsConfig.whatsappConversionLabel
+        ? `if(window.gtag){gtag('event','conversion',{'send_to':'${googleAdsConfig.whatsappConversionLabel}'});}`
+        : '';
     const phoneFormats = CONTACT_INFO.phone;
     const phoneLinks = new Set();
     const localDialString = phoneFormats.local;
@@ -71,6 +82,10 @@ function initSite() {
         }
 
         phoneLinks.add(link);
+
+        if (phoneConversionAttribute) {
+            link.setAttribute('onclick', phoneConversionAttribute);
+        }
     }
 
     function applyPhoneHrefByCountry(countryCode) {
@@ -318,6 +333,9 @@ function initSite() {
     whatsappBtn.rel = 'noopener';
     whatsappBtn.setAttribute('aria-label', 'Chat on WhatsApp');
     whatsappBtn.innerHTML = '<i class="fab fa-whatsapp"></i>';
+    if (whatsappConversionAttribute) {
+        whatsappBtn.setAttribute('onclick', whatsappConversionAttribute);
+    }
     document.body.appendChild(whatsappBtn);
 
     const whatsappLinkSelectors = ['a[href*="wa.me"]', 'a[href*="api.whatsapp.com"]'];
@@ -333,6 +351,9 @@ function initSite() {
         link.rel = Array.from(relTokens).join(' ');
         if (!link.hasAttribute('target')) {
             link.setAttribute('target', '_blank');
+        }
+        if (whatsappConversionAttribute) {
+            link.setAttribute('onclick', whatsappConversionAttribute);
         }
     });
 
