@@ -132,7 +132,15 @@
   ]
 }
     </script>
-    
+        <!-- Global site tag (gtag.js) - Google Ads -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17608473030"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'AW-17608473030');
+    </script>
+
 </head>
 <body>
     <div id="navbar-placeholder"></div>
@@ -608,5 +616,33 @@
 
     <div id="footer-placeholder"></div>
     <script src="js/script.js"></script>
+    <!-- Google Ads conversion for "Contact" - click-to-call -->
+    <script>
+      // funcția standard generată de Google (cu label-ul tău real)
+      function gtag_report_conversion(url) {
+        var callback = function () {
+          if (typeof(url) != 'undefined') {
+            window.location = url; // continuă apelul telefonic
+          }
+        };
+        gtag('event', 'conversion', {
+          'send_to': 'AW-17608473030/FWGPCMDs56QbEMbzr8xB',
+          'event_callback': callback
+        });
+        return false;
+      }
+
+      // Atașează automat conversia pe ORICE <a href="tel:..."> de pe pagină
+      document.addEventListener('click', function (e) {
+        var link = e.target.closest('a[href^="tel:"]');
+        if (!link) return;
+
+        // dacă gtag e gata, raportează conversia și apoi apelează numărul
+        if (window.gtag) {
+          e.preventDefault();                              // oprește acțiunea implicită
+          gtag_report_conversion(link.getAttribute('href')); // trimite conversia și apoi sună
+        }
+      }, {capture: true});
+    </script>
 </body>
 </html>
