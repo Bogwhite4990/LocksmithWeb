@@ -28,7 +28,7 @@ function initSite() {
         whatsappConversionLabel: 'AW-17608473030/LABEL_WHATSAPP'
     };
     const phoneConversionAttribute = googleAdsConfig.phoneConversionLabel
-        ? `if(window.gtag){gtag('event','conversion',{'send_to':'${googleAdsConfig.phoneConversionLabel}'});}`
+        ? "return gtag_report_conversion(this.href);"
         : '';
     const whatsappConversionAttribute = googleAdsConfig.whatsappConversionLabel
         ? `if(window.gtag){gtag('event','conversion',{'send_to':'${googleAdsConfig.whatsappConversionLabel}'});}`
