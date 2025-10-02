@@ -1,6 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17608473030"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'AW-17608473030');
+    </script>
+    <!-- Event snippet for Contact conversion page In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
+    <script>
+        function gtag_report_conversion(url) {
+            var callback = function () {
+                if (typeof(url) != 'undefined') {
+                    window.location = url;
+                }
+            };
+            gtag('event', 'conversion', {
+                'send_to': 'AW-17608473030/PWGPCMDb56QbEMbzr8xB',
+                'event_callback': callback
+            });
+            return false;
+        }
+    </script>
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -68,20 +92,6 @@
   ]
 }
     </script>
-    <script>
-function gtag_report_conversion(url) {
-  var callback = function () {
-    if (typeof(url) != 'undefined') {
-      window.location = url;
-    }
-  };
-  gtag('event', 'conversion', {
-      'send_to': 'AW-17608473030/PWGPCMDb56QbEMbzr8xB',
-      'event_callback': callback
-  });
-  return false;
-}
-</script>
 </head>
 <body>
     <div id="navbar-placeholder"></div>
@@ -113,7 +123,7 @@ function gtag_report_conversion(url) {
                         <h2>Contact Information</h2>
                         <p>For immediate assistance, please call us. We are available 24/7.</p>
                         <ul class="contact-details">
-                            <li><strong>Phone:</strong> <a href="tel:02039513549">02039513549</a></li>
+                            <li><strong>Phone:</strong> <a href="tel:02039513549" onclick="return gtag_report_conversion(this.href);">02039513549</a></li>
                             <li><strong>Email:</strong> <a href="mailto:contact@lockersmith.co.uk">contact@lockersmith.co.uk</a></li>
                             <li><strong>Address:</strong> <span class="contact-address"></span></li>
                         </ul>

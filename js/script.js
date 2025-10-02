@@ -27,7 +27,7 @@ if (!window.GOOGLE_ADS_CONFIG) {
     // TODO: Replace the conversion label placeholders with the actual values from Google Ads.
     window.GOOGLE_ADS_CONFIG = {
         conversionId: GOOGLE_ADS_CONVERSION_ID,
-        phoneConversionLabel: 'AW-17608473030/LABEL_PHONE',
+        phoneConversionLabel: 'AW-17608473030/PWGPCMDb56QbEMbzr8xB',
         whatsappConversionLabel: 'AW-17608473030/LABEL_WHATSAPP'
     };
 }
@@ -48,7 +48,7 @@ const NAVBAR_HTML = `<header>
             </ul>
         </nav>
         <div class="header-phone">
-            <a href="tel:02039513549">Call Us: 02039513549</a>
+            <a href="tel:02039513549" onclick="return gtag_report_conversion(this.href);">Call Us: 02039513549</a>
             <div class="header-social">
                 <a href="https://www.facebook.com/profile.php?id=61581353704416" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
                 <a href="https://www.instagram.com/lockersmithuk/" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
@@ -89,7 +89,7 @@ const FOOTER_HTML = `<footer>
             </div>
             <div class="footer-contact">
                 <h3>Contact Us</h3>
-                <p>Call Us: <a href="tel:02039513549">02039513549</a></p>
+                <p>Call Us: <a href="tel:02039513549" onclick="return gtag_report_conversion(this.href);">02039513549</a></p>
                 <p>Email: <a href="mailto:contact@lockersmith.co.uk">contact@lockersmith.co.uk</a></p>
                 <div class="social-media">
                     <a href="https://www.facebook.com/profile.php?id=61581353704416" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
